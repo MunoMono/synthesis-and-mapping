@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#f4f4f4" stroke="#c6c6c6"/>
+  <g font-family="IBM Plex Sans, Arial, sans-serif" fill="#161616">
+    <text x="60" y="80" font-size="32" font-weight="600">Placeholder System Diagram</text>
+    <rect x="60" y="120" width="280" height="120" fill="#ffffff" stroke="#8d8d8d"/>
+    <text x="80" y="170" font-size="16">Node A</text>
+
+    <rect x="460" y="120" width="280" height="120" fill="#ffffff" stroke="#8d8d8d"/>
+    <text x="480" y="170" font-size="16">Node B</text>
+
+    <rect x="860" y="120" width="280" height="120" fill="#ffffff" stroke="#8d8d8d"/>
+    <text x="880" y="170" font-size="16">Node C</text>
+
+    <line x1="340" y1="180" x2="460" y2="180" stroke="#0f62fe" stroke-width="3"/>
+    <line x1="740" y1="180" x2="860" y2="180" stroke="#0f62fe" stroke-width="3"/>
+
+    <rect x="260" y="360" width="680" height="120" fill="#ffffff" stroke="#8d8d8d"/>
+    <text x="280" y="420" font-size="16">Subsystem</text>
+  </g>
+</svg>

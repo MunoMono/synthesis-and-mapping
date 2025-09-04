@@ -1,0 +1,176 @@
+import { useParams, Link } from "react-router-dom";
+import { Grid, Column, Heading, Button } from "@carbon/react";
+import { Download } from "@carbon/icons-react";
+import Crumb from "../components/Crumb.jsx";
+import fallbackSvg from "../assets/placeholder.svg";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import diagrams from "../data/diagrams.json";
+
+// Eagerly import all assets for full-size diagram resolution
+const assetUrls = import.meta.glob("../assets/*.{svg,png,jpg,jpeg,webp}", {
+  eager: true,
+  as: "url",
+});
+
+function resolveDiagramUrl(item) {
+  if (item.file && assetUrls[`../assets/${item.file}`]) {
+    return assetUrls[`../assets/${item.file}`];
+  }
+  return assetUrls[`../assets/${item.slug}.svg`] || fallbackSvg;
+}
+
+// parse width/height from SVG text; fall back to viewBox or defaults
+function getSvgSize(svgText) {
+  const widthMatch = svgText.match(/width="([\d.]+)(px)?"/i);
+  const heightMatch = svgText.match(/height="([\d.]+)(px)?"/i);
+  if (widthMatch && heightMatch) {
+    return { w: parseFloat(widthMatch[1]), h: parseFloat(heightMatch[1]) };
+  }
+  const viewBoxMatch = svgText.match(/viewBox="([\d.\s-]+)"/i);
+  if (viewBoxMatch) {
+    const [, vb] = viewBoxMatch;
+    const parts = vb.trim().split(/\s+/).map(Number);
+    if (parts.length === 4) return { w: parts[2], h: parts[3] };
+  }
+  return { w: 1200, h: 800 }; // sensible default
+}
+
+export default function Diagram() {
+  const { slug } = useParams();
+  const meta =
+    diagrams.find((d) => d.slug === slug) || {
+      slug: "placeholder",
+      title: "Systems Map — Placeholder",
+      desc: "Example exported SVG (Mermaid → Miro → SVG) shown in Carbon.",
+      thumb: "placeholder.svg",
+      caption:
+        "A placeholder diagram to validate Carbon layout, theming, and zoom interactions.",
+    };
+
+  const svgUrl = resolveDiagramUrl(meta);
+
+  // ----- Download: SVG (as-is) -----
+  const handleDownloadSVG = async () => {
+    const res = await fetch(svgUrl);
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${meta.slug}.svg`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  };
+
+  // ----- Download: PNG (render SVG -> canvas -> png) -----
+  const handleDownloadPNG = async () => {
+    const svgText = await (await fetch(svgUrl)).text();
+    const { w, h } = getSvgSize(svgText);
+
+    // 2x scale for crisper export
+    const scale = 2;
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.round(w * scale);
+    canvas.height = Math.round(h * scale);
+    const ctx = canvas.getContext("2d");
+
+    // Use a Blob URL to avoid crossOrigin taint
+    const blob = new Blob([svgText], { type: "image/svg+xml;charset=utf-8" });
+    const blobUrl = URL.createObjectURL(blob);
+    const img = new Image();
+    img.onload = () => {
+      ctx.setTransform(scale, 0, 0, scale, 0, 0);
+      ctx.drawImage(img, 0, 0);
+      URL.revokeObjectURL(blobUrl);
+
+      canvas.toBlob((pngBlob) => {
+        const url = URL.createObjectURL(pngBlob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${meta.slug}.png`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      }, "image/png");
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(blobUrl);
+      alert("Sorry, PNG export failed.");
+    };
+    img.src = blobUrl;
+  };
+
+  return (
+    <div style={{ padding: "1rem" }}>
+      <Crumb
+        trail={[
+          { label: "Home", to: "/" },
+          { label: meta.title, isCurrentPage: true },
+        ]}
+      />
+
+      <Grid fullWidth narrow style={{ marginTop: "1rem" }}>
+        <Column lg={16} md={8} sm={4}>
+          <Heading as="h1" className="t-heading-03">
+            {meta.title}
+          </Heading>
+        </Column>
+
+        <Column lg={16} md={8} sm={4}>
+          <div className="figure" style={{ marginTop: "1rem" }}>
+            <div
+              style={{
+                border: "1px solid var(--cds-border-subtle-00)",
+                background: "var(--cds-layer)",
+                height: "70vh",
+                width: "100%",
+                overflow: "hidden",
+              }}
+              aria-label="Interactive diagram area"
+            >
+              <TransformWrapper
+                minScale={0.5}
+                initialScale={1}
+                doubleClick={{ disabled: false }}
+                wheel={{ step: 0.1 }}
+                panning={{ velocityDisabled: true }}
+                pinch={{ step: 5 }}
+              >
+                <TransformComponent wrapperStyle={{ width: "100%", height: "100%" }}>
+                  <img
+                    src={svgUrl}
+                    alt={meta.title}
+                    style={{ display: "block", maxWidth: "none", width: "100%" }}
+                  />
+                </TransformComponent>
+              </TransformWrapper>
+            </div>
+
+            {/* Caption */}
+            <div className="figure__caption t-helper-text-01" style={{ marginTop: "0.5rem" }}>
+              {meta.caption || meta.desc}
+            </div>
+
+            {/* Actions */}
+            <div style={{ marginTop: "0.75rem", display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+              <Button kind="tertiary" onClick={handleDownloadPNG} renderIcon={Download}>
+                Download PNG
+              </Button>
+              <Button kind="tertiary" onClick={handleDownloadSVG} renderIcon={Download}>
+                Download SVG
+              </Button>
+            </div>
+
+            <div style={{ marginTop: "0.75rem" }}>
+              <Link to="/" aria-label="Back to Home">
+                ← Back to Home
+              </Link>
+            </div>
+          </div>
+        </Column>
+      </Grid>
+    </div>
+  );
+}

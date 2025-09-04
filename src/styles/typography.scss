@@ -1,0 +1,24 @@
+@use '@carbon/react/scss/type' as type;
+
+/* Utility classes mapped to Carbon type tokens */
+/* Pick the ones you use most; this set is a solid starting point. */
+
+.t-label-01        { @include type.type-style('label-01'); }
+.t-label-02        { @include type.type-style('label-02'); }
+.t-helper-text-01  { @include type.type-style('helper-text-01'); }
+.t-helper-text-02  { @include type.type-style('helper-text-02'); }
+
+.t-body-01         { @include type.type-style('body-01'); }
+.t-body-02         { @include type.type-style('body-02'); }
+.t-body-compact-01 { @include type.type-style('body-compact-01'); }
+.t-body-compact-02 { @include type.type-style('body-compact-02'); }
+
+.t-code-01         { @include type.type-style('code-01'); }
+.t-code-02         { @include type.type-style('code-02'); }
+
+/* Headings: pick what you need */
+.t-heading-01      { @include type.type-style('heading-01'); }
+.t-heading-02      { @include type.type-style('heading-02'); }
+.t-heading-03      { @include type.type-style('heading-03'); }
+.t-heading-04      { @include type.type-style('heading-04'); }
+.t-heading-05      { @include type.type-style('heading-05'); }

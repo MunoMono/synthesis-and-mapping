@@ -1,0 +1,10 @@
+[
+  {
+    "slug": "placeholder",
+    "title": "Systems Map — Placeholder",
+    "desc": "Example exported SVG (Mermaid → Miro → SVG) shown in Carbon.",
+    "thumb": "placeholder.svg",
+    "tags": ["systems", "example"],
+    "date": "2025-09-04"
+  }
+]
