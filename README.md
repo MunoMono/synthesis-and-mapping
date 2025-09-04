@@ -75,11 +75,18 @@ The app is deployed via the `gh-pages` branch to GitHub Pages.
 Every time you want to push a new version live:
 
 ``` bash
+# 1. Save your work to GitHub (main branch)
+git add .
+git commit -m "Your message"
+git push
+
+# 2. Deploy the latest build to GitHub Pages
 npm run deploy
 ```
 
-This will: - Build the app into `/dist` - Push that folder to the
-`gh-pages` branch
+This will:
+- Build the app into `/dist`
+- Push that folder to the `gh-pages` branch
 
 ### Live site
 
@@ -94,7 +101,8 @@ Art**.\
 It provides a framework to **visualise complexity** through world-class
 diagrams, styled consistently using IBM Carbon Design System.
 
-Diagrams are typically: - Created in **Mermaid** (for structure)\
+Diagrams are typically:
+- Created in **Mermaid** (for structure)\
 - Styled in **Miro** (to match design guidelines)\
 - Exported as **SVG** and showcased in this React app
 
