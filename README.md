@@ -90,7 +90,7 @@ This will:
 
 ### Live site
 
-👉 <https://MunoMono.github.io/synthesis-and-mapping>
+👉 <https://munomono.github.io/synthesis-and-mapping/>
 
 ------------------------------------------------------------------------
 
