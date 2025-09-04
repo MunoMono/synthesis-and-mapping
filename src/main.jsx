@@ -7,9 +7,11 @@ import '@carbon/styles/css/styles.css'
 import '@ibm/plex/css/ibm-plex.min.css'
 import './styles/index.scss'
 
+const base = import.meta.env.BASE_URL || '/'
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={base}>
       <App />
     </BrowserRouter>
   </React.StrictMode>
