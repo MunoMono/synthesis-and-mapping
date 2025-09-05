@@ -1,15 +1,69 @@
-/* Your additions */
-@use '@carbon/react/scss/type' as type;
-@use '@carbon/react/scss/spacing' as *;
-@use './typography.scss';
+/* ===========================
+   Carbon Sass bootstrap + theme
+   =========================== */
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/type' as type;      /* typography mixins */
+@use '@carbon/styles/scss/spacing' as *;      /* $spacing-03, etc. */
+@use '@carbon/styles/scss/themes' as *;       /* $g10, $g90, $g100 */
+@use '@carbon/styles/scss/theme';             /* theme() -> CSS vars */
+@use '@carbon/styles/scss/colors' as colors;  /* $blue-40, $magenta-40, ... */
 
-/* Base */
+/* Your local type utility classes (keep) */
+@use './typography';
+
+/* 1) Reset + type reset */
+@include reset.reset();
+@include type.reset();
+
+/* 2) Emit Carbon theme variables (default light: g10).
+      Switch by toggling data-theme="g10" | "g90" | "g100" on <html> */
+:root { @include theme.theme($g10); }
+html[data-theme='g90']  { @include theme.theme($g90);  }
+html[data-theme='g100'] { @include theme.theme($g100); } /* dark */
+
+/* 3) Base body (keep your intent, now aligned to Carbon vars) */
 body {
   margin: 0;
-  @include type.type-style('body-01'); /* default body text */
+  @include type.type-style('body-01');
+  color: var(--cds-text-primary);
+  background: var(--cds-background);
+  font-family: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
 }
 
-/* Reusable figure/caption */
+/* 4) Diagram-friendly accent vars (mapped to Carbon grades) */
+:root {
+  --sm-accent-strategy: #{colors.$magenta-40};
+  --sm-accent-input:    #{colors.$blue-40};
+  --sm-accent-method:   #{colors.$purple-40};
+  --sm-accent-fuse:     #{colors.$teal-40};
+
+  /* status colors */
+  --sm-accent-warn:     #{colors.$yellow-40};
+  --sm-accent-error:    #{colors.$red-40};
+  --sm-accent-success:  #{colors.$green-40};
+
+  /* diagram neutrals (follow theme) */
+  --sm-node-fill:       var(--cds-layer);
+  --sm-node-border:     var(--cds-border-subtle);
+  --sm-node-text:       var(--cds-text-primary);
+}
+
+/* 5) Canvas/panel helper (no mixin; use vars) */
+.diagram-canvas {
+  background: var(--sm-node-fill);
+  color: var(--sm-node-text);
+  border: 1px solid var(--sm-node-border);
+  border-radius: 12px;
+  /* subtle depth that plays nice in light/dark */
+  box-shadow:
+    0 1px 0 0 var(--cds-border-subtle),
+    0 2px 6px 0 rgba(0,0,0,.08);
+}
+
+/* ===========================
+   Your existing classes (kept)
+   =========================== */
+
 .figure {
   display: grid;
   gap: $spacing-03;
@@ -18,17 +72,15 @@ body {
     width: 100%;
     height: auto;
     display: block;
-    border: 1px solid var(--cds-border-subtle-00);
+    border: 1px solid var(--cds-border-subtle);
     background: var(--cds-layer);
+    border-radius: 4px;
   }
 
-  /* Use token class in JSX: className="figure__caption t-label-01" */
-  &__caption {
-    color: var(--cds-text-secondary);
-  }
+  /* Use in JSX: className="figure__caption t-label-01" */
+  &__caption { color: var(--cds-text-secondary); }
 }
 
-/* Card grid */
 .cardGrid {
   display: grid;
   gap: $spacing-06;

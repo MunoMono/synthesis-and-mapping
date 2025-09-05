@@ -12,11 +12,18 @@ const assetUrls = import.meta.glob("../assets/*.{svg,png,jpg,jpeg,webp}", {
   as: "url",
 });
 
-function resolveDiagramUrl(item) {
-  if (item.file && assetUrls[`../assets/${item.file}`]) {
-    return assetUrls[`../assets/${item.file}`];
+function resolveEntry(slug) {
+  return diagrams.find((d) => d.slug === slug);
+}
+
+function resolveDiagramUrl(entry) {
+  if (!entry) return fallbackSvg;
+  // prefer explicit file if present
+  if (entry.file && assetUrls[`../assets/${entry.file}`]) {
+    return assetUrls[`../assets/${entry.file}`];
   }
-  return assetUrls[`../assets/${item.slug}.svg`] || fallbackSvg;
+  // default to slug.svg in /src/assets
+  return assetUrls[`../assets/${entry.slug}.svg`] || fallbackSvg;
 }
 
 // parse width/height from SVG text; fall back to viewBox or defaults
@@ -37,17 +44,15 @@ function getSvgSize(svgText) {
 
 export default function Diagram() {
   const { slug } = useParams();
-  const meta =
-    diagrams.find((d) => d.slug === slug) || {
+  const entry =
+    resolveEntry(slug) ||
+    resolveEntry("interpretivist-research-process") || {
       slug: "placeholder",
-      title: "Systems Map — Placeholder",
-      desc: "Example exported SVG (Mermaid → Miro → SVG) shown in Carbon.",
-      thumb: "placeholder.svg",
-      caption:
-        "A placeholder diagram to validate Carbon layout, theming, and zoom interactions.",
+      title: "Diagram",
+      desc: "Static SVG diagram",
     };
 
-  const svgUrl = resolveDiagramUrl(meta);
+  const svgUrl = resolveDiagramUrl(entry);
 
   // ----- Download: SVG (as-is) -----
   const handleDownloadSVG = async () => {
@@ -56,7 +61,7 @@ export default function Diagram() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `${meta.slug}.svg`;
+    a.download = `${entry.slug}.svg`;
     document.body.appendChild(a);
     a.click();
     a.remove();
@@ -88,7 +93,7 @@ export default function Diagram() {
         const url = URL.createObjectURL(pngBlob);
         const a = document.createElement("a");
         a.href = url;
-        a.download = `${meta.slug}.png`;
+        a.download = `${entry.slug}.png`;
         document.body.appendChild(a);
         a.click();
         a.remove();
@@ -107,14 +112,14 @@ export default function Diagram() {
       <Crumb
         trail={[
           { label: "Home", to: "/" },
-          { label: meta.title, isCurrentPage: true },
+          { label: entry.title, isCurrentPage: true },
         ]}
       />
 
       <Grid fullWidth narrow style={{ marginTop: "1rem" }}>
         <Column lg={16} md={8} sm={4}>
           <Heading as="h1" className="t-heading-03">
-            {meta.title}
+            {entry.title}
           </Heading>
         </Column>
 
@@ -122,7 +127,7 @@ export default function Diagram() {
           <div className="figure" style={{ marginTop: "1rem" }}>
             <div
               style={{
-                border: "1px solid var(--cds-border-subtle-00)",
+                border: "1px solid var(--cds-border-subtle)",
                 background: "var(--cds-layer)",
                 height: "70vh",
                 width: "100%",
@@ -141,7 +146,7 @@ export default function Diagram() {
                 <TransformComponent wrapperStyle={{ width: "100%", height: "100%" }}>
                   <img
                     src={svgUrl}
-                    alt={meta.title}
+                    alt={entry.title}
                     style={{ display: "block", maxWidth: "none", width: "100%" }}
                   />
                 </TransformComponent>
@@ -150,7 +155,7 @@ export default function Diagram() {
 
             {/* Caption */}
             <div className="figure__caption t-helper-text-01" style={{ marginTop: "0.5rem" }}>
-              {meta.caption || meta.desc}
+              {entry.caption || entry.desc}
             </div>
 
             {/* Actions */}

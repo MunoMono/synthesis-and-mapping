@@ -1,25 +1,38 @@
 [
   {
-    "slug": "placeholder",
-    "title": "Systems Map — Placeholder",
-    "desc": "Example exported SVG (Mermaid → Miro → SVG) shown in Carbon.",
-    "thumb": "placeholder.svg",
-    "tags": [
-      "systems",
-      "example"
-    ],
-    "date": "2025-09-04"
-  },
-  {
     "slug": "interpretivist-research-process",
     "title": "Interpretivist research process",
     "desc": "PhD research flow diagram (interpretivist paradigm)",
     "thumb": "interpretivist-research-process.svg",
-    "tags": [
-      "research",
-      "methodology",
-      "interpretivism"
-    ],
+    "tags": ["research", "methodology", "interpretivism"],
     "date": "2025-09-05"
+  },
+  {
+    "slug": "context-engineering",
+    "title": "Context engineering over Multimodal RAG",
+    "desc": "Carbon-styled flow: strategy → components → assembly → analyzer → fusion → generation.",
+    "thumb": null,
+    "tags": ["context", "rag", "systems"],
+    "date": "2025-09-05",
+    "spec": {
+      "direction": "DOWN",
+      "nodes": [
+        { "id": "A", "label": "Context strategy",              "accentVar": "--sm-accent-strategy" },
+        { "id": "B", "label": "Context components",            "accentVar": "--sm-accent-input" },
+        { "id": "D", "label": "Assembly and optimisation",       "accentVar": "--sm-accent-fuse" },
+        { "id": "E", "label": "RAG query analyzer",            "accentVar": "--sm-accent-method" },
+        { "id": "G", "label": "Fusion layer",                  "accentVar": "--sm-accent-fuse" },
+        { "id": "H", "label": "LLM generator" },
+        { "id": "I", "label": "Final answer" }
+      ],
+      "edges": [
+        { "source": "A", "target": "B", "accentVar": "--sm-accent-strategy" },
+        { "source": "B", "target": "D" },
+        { "source": "D", "target": "E", "accentVar": "--sm-accent-method" },
+        { "source": "E", "target": "G", "accentVar": "--sm-accent-fuse" },
+        { "source": "G", "target": "H" },
+        { "source": "H", "target": "I" }
+      ]
+    }
   }
 ]
