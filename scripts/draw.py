@@ -2,6 +2,31 @@
 import argparse, re, sys, pathlib, yaml
 from graphviz import Digraph
 
+# =========================
+#  Typography token presets
+#  (approx Carbon v11 sizes)
+#  Use with nodes as extra classes, e.g.  A:::carbonBlue:::t-heading-02
+# =========================
+TYPE_TOKENS = {
+    # Labels / helper
+    "t-label-01":       {"fontsize": "12", "fontname": "IBM Plex Sans"},
+    "t-helper-text-01": {"fontsize": "12", "fontname": "IBM Plex Sans"},
+    # Body
+    "t-body-01":        {"fontsize": "14", "fontname": "IBM Plex Sans"},
+    "t-body-02":        {"fontsize": "16", "fontname": "IBM Plex Sans"},
+    "t-body-compact-01":{"fontsize": "13", "fontname": "IBM Plex Sans"},
+    "t-body-compact-02":{"fontsize": "15", "fontname": "IBM Plex Sans"},
+    # Code
+    "t-code-01":        {"fontsize": "12", "fontname": "IBM Plex Mono"},
+    "t-code-02":        {"fontsize": "14", "fontname": "IBM Plex Mono"},
+    # Headings (SemiBold if installed; Graphviz will fall back)
+    "t-heading-01":     {"fontsize": "16", "fontname": "IBM Plex Sans SemiBold"},
+    "t-heading-02":     {"fontsize": "20", "fontname": "IBM Plex Sans SemiBold"},
+    "t-heading-03":     {"fontsize": "24", "fontname": "IBM Plex Sans SemiBold"},
+    "t-heading-04":     {"fontsize": "28", "fontname": "IBM Plex Sans SemiBold"},
+    "t-heading-05":     {"fontsize": "32", "fontname": "IBM Plex Sans SemiBold"},
+}
+
 # ---------- parsing helpers ----------
 def unquote(s: str) -> str:
     if not s:
@@ -36,38 +61,50 @@ def parse_markdown(md: str):
 
     direction = (head.group(1).upper() if head else 'TD')
 
-    nodes = {}   # id -> {label, shape, cls}
-    edges = []   # (src, dst, cls)
-    classes = {} # name -> {fill, stroke, color}
+    # id -> {label, shape, classes:[...]}
+    nodes = {}
+    # edges: (src, dst)
+    edges = []
+    # classes: name -> {fill, stroke, color, fontname?, fontsize?}
+    classes = {}
 
     def ensure(nid):
         if nid not in nodes:
-            nodes[nid] = {"label": nid, "shape": "rect", "cls": None}
+            nodes[nid] = {"label": nid, "shape": "rect", "classes": []}
         return nodes[nid]
 
     for line in (l.strip() for l in body.splitlines()):
         if not line or line.startswith('%') or re.match(r'^(flowchart|graph)\b', line, re.I):
             continue
 
-        # classDef NAME fill:#..,stroke:#..,color:#..
+        # classDef NAME fill:#..,stroke:#..,color:#..[,fontname:"IBM Plex Sans",fontsize:14]
         m = re.match(r'^classDef\s+([A-Za-z0-9_-]+)\s+(.+)$', line, flags=re.I)
         if m:
             name = m.group(1)
-            kv = dict(
-                (k.strip(), v.strip())
-                for k, v in (p.split(':', 1) for p in m.group(2).split(',') if ':' in p)
-            )
+            # split top-level commas but allow colons inside quotes
+            parts = [p.strip() for p in m.group(2).split(',') if ':' in p]
+            kv = {}
+            for p in parts:
+                k, v = p.split(':', 1)
+                kv[k.strip()] = unquote(v.strip())
             classes[name] = {
-                "fill":   kv.get("fill"),
-                "stroke": kv.get("stroke"),
-                "color":  kv.get("color"),
+                "fill":     kv.get("fill"),
+                "stroke":   kv.get("stroke"),
+                "color":    kv.get("color"),
+                "fontname": kv.get("fontname"),
+                "fontsize": kv.get("fontsize"),
             }
             continue
 
-        # class attach: A:::cls
-        m = re.match(r'^([A-Za-z0-9_-]+)\s*:::\s*([A-Za-z0-9_-]+)$', line)
+        # class attach: A:::cls or A:::colorClass:::typeClass
+        m = re.match(r'^([A-Za-z0-9_-]+)\s*:::\s*([A-Za-z0-9_:.\-]+)$', line)
         if m:
-            ensure(m.group(1))["cls"] = m.group(2)
+            nid, rest = m.group(1), m.group(2)
+            n = ensure(nid)
+            toks = [t for t in rest.split(":::") if t]
+            # de-dup while preserving order
+            seen = set()
+            n["classes"] = [t for t in (n["classes"] + toks) if (t not in seen and not seen.add(t))]
             continue
 
         # node declaration: A["Label"] | B{ "Decision" }
@@ -103,7 +140,7 @@ def parse_markdown(md: str):
                     part = mR.group(2)
                     nodes[dst]["shape"] = "diamond" if part.startswith("{") else "rect"
                     nodes[dst]["label"] = unquote(part[1:-1].strip())
-                edges.append((src, dst, None))
+                edges.append((src, dst))
             continue
 
     return {
@@ -118,49 +155,109 @@ def parse_markdown(md: str):
 CARBON = {
     "layer":  "#161616",
     "border": "#393939",
-    "text":   "#f4f4f4",
     "edge":   "#78a9ff"
 }
 
-def class_style(cls, classes):
-    if not cls or cls not in classes:
-        return {"fillcolor": CARBON["layer"], "color": CARBON["edge"], "fontcolor": CARBON["text"]}
-    c = classes[cls]
+def color_style(classes_list, classes_map):
+    """
+    Pick the first class that has a classDef; pass through fill/stroke/color,
+    AND typography props (fontname, fontsize) if present.
+    """
+    if classes_list:
+        for c in classes_list:
+            if c in classes_map:
+                cc = classes_map[c]
+                return {
+                    "fillcolor": cc.get("fill")     or CARBON["layer"],
+                    "color":     cc.get("stroke")   or CARBON["edge"],
+                    "fontcolor": cc.get("color")    or "#161616",
+                    "fontname":  cc.get("fontname"),
+                    "fontsize":  cc.get("fontsize"),
+                }
     return {
-        "fillcolor": c.get("fill")   or CARBON["layer"],
-        "color":     c.get("stroke") or CARBON["edge"],
-        "fontcolor": c.get("color")  or CARBON["text"],
+        "fillcolor": CARBON["layer"],
+        "color":     CARBON["edge"],
+        "fontcolor": "#161616",
+        "fontname":  None,
+        "fontsize":  None
     }
+
+def type_style(classes_list):
+    """
+    Merge typography tokens from TYPE_TOKENS (last one wins).
+    """
+    out = {}
+    if not classes_list:
+        return out
+    for c in classes_list:
+        if c in TYPE_TOKENS:
+            out.update(TYPE_TOKENS[c])
+    return out
 
 def build_graph(model):
     rankdir = "LR" if model["direction"] == "LR" else "TB"
+
+    # Background can be overridden in front-matter: config.background
+    bg = model["config"].get("background", "#F4F4F4")
+
     g = Digraph("G", format="svg")
-    g.attr(rankdir=rankdir, nodesep="0.4", ranksep="0.8", bgcolor="#F4F4F4")
-    g.attr("node",
-           shape="box", style="rounded,filled",
-           width="2.6", height="0.9",
-           color=CARBON["border"], fillcolor=CARBON["layer"], fontcolor=CARBON["text"],
-           penwidth="1", fontname="IBM Plex Sans")
+    g.attr(rankdir=rankdir, nodesep="0.4", ranksep="0.8", bgcolor=bg)
+
+    # Global node defaults (can be overridden per node)
+    g.attr(
+        "node",
+        shape="box",
+        style="rounded,filled",
+        width="2.6",
+        height="0.9",
+        color=CARBON["border"],
+        fillcolor=CARBON["layer"],
+        fontcolor="#161616",
+        penwidth="1",
+        fontname="IBM Plex Sans",   # requires local install
+        fontsize="14"
+    )
     g.attr("edge", color=CARBON["edge"], penwidth="2", arrowsize="0.7")
 
+    # Nodes
     for nid, nd in model["nodes"].items():
-        sty = class_style(nd.get("cls"), model["classes"])
+        classes_list = nd.get("classes", [])
+
+        csty = color_style(classes_list, model["classes"])
+        tsty = type_style(classes_list)
+
         attrs = {
             "label": nd.get("label", nid),
-            "color": sty["color"],
-            "fillcolor": sty["fillcolor"],
-            "fontcolor": sty["fontcolor"],
+            "color": csty["color"],
+            "fillcolor": csty["fillcolor"],
+            "fontcolor": csty["fontcolor"],
         }
+
+        # From classDef (fontname/fontsize) if provided
+        if csty.get("fontname"):
+            attrs["fontname"] = csty["fontname"]
+        if csty.get("fontsize"):
+            attrs["fontsize"] = str(csty["fontsize"])
+
+        # Then allow t-* tokens to override (optional)
+        if tsty.get("fontname"):
+            attrs["fontname"] = tsty["fontname"]
+        if tsty.get("fontsize"):
+            attrs["fontsize"] = tsty["fontsize"]
+
+        # Shape
         if nd.get("shape") == "diamond":
             attrs["shape"] = "diamond"
             attrs["style"] = "filled"
             attrs["height"] = "1.1"
             attrs["width"] = "2.2"
+
         g.node(nid, **attrs)
 
-    for (s, t, _cls) in model["edges"]:
-        tgt_cls = model["nodes"].get(t, {}).get("cls")
-        stroke = class_style(tgt_cls, model["classes"])["color"]
+    # Edges — paint with target's stroke color for coherence
+    for (s, t) in model["edges"]:
+        tgt_classes = model["nodes"].get(t, {}).get("classes", [])
+        stroke = color_style(tgt_classes, model["classes"])["color"]
         g.edge(s, t, color=stroke)
 
     return g
@@ -175,7 +272,7 @@ def render_file(in_path: pathlib.Path, out_path: pathlib.Path):
     print(f"Wrote {out_path}")
 
 def main():
-    ap = argparse.ArgumentParser(description="Draw Mermaid-like flowchart to SVG (Carbon-styled)")
+    ap = argparse.ArgumentParser(description="Draw Mermaid-like flowchart to SVG (Carbon-styled, IBM Plex typography)")
     ap.add_argument("-i", "--in", dest="inpath", required=True, help="Input .md file OR a directory to render all .md")
     ap.add_argument("-o", "--out", dest="outpath", help="Output .svg (file mode only)")
     ap.add_argument("--outdir", default="src/assets", help="Output directory (directory mode)")

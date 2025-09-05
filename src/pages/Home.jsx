@@ -37,7 +37,7 @@ export default function Home() {
             className="t-heading-03"
             style={{ marginBottom: "1rem" }}
           >
-            Synthesis and mapping
+            Diagramming the research process with visual communication
           </Heading>
         </Column>
 

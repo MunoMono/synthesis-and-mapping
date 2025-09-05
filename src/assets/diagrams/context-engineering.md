@@ -3,21 +3,21 @@ config:
   layout: dagre
 ---
 flowchart TD
-    A["Context Engineering Strategy"] --> B{"Context Components"}
+    A["Context engineering strategy"] --> B{"Context components"}
     B --> C1["cinstr"] & C2["cknow"] & C3["ctools"] & C4["cmem"] & C5["cstate"] & C6["cquery"]
-    C1 --> D["Assembly and Optimisation"]
+    C1 --> D["Assembly and optimisation"]
     C2 --> D
     C3 --> D
     C4 --> D
     C5 --> D
     C6 --> D
-    D --> E{"RAG Query Analyzer"}
-    E --> F1["Vector RAG"] & F2["Graph RAG"] & F3["Other Modalities"]
-    F1 --> G["Fusion Layer"]
+    D --> E{"RAG query analyzer"}
+    E --> F1["Vector RAG"] & F2["Graph RAG"] & F3["other modalities"]
+    F1 --> G["Fusion layer"]
     F2 --> G
     F3 --> G
-    G --> H["LLM Generator"]
-    H --> I["Final Answer"]
+    G --> H["LLM generator"]
+    H --> I["Final answer"]
      A:::carbonPink
      B:::carbonDefault
      C1:::carbonBlue
