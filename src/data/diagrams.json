@@ -4,7 +4,22 @@
     "title": "Systems Map — Placeholder",
     "desc": "Example exported SVG (Mermaid → Miro → SVG) shown in Carbon.",
     "thumb": "placeholder.svg",
-    "tags": ["systems", "example"],
+    "tags": [
+      "systems",
+      "example"
+    ],
     "date": "2025-09-04"
+  },
+  {
+    "slug": "interpretivist-research-process",
+    "title": "Interpretivist research process",
+    "desc": "PhD research flow diagram (interpretivist paradigm)",
+    "thumb": "interpretivist-research-process.svg",
+    "tags": [
+      "research",
+      "methodology",
+      "interpretivism"
+    ],
+    "date": "2025-09-05"
   }
 ]
