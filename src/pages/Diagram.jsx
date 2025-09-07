@@ -6,6 +6,10 @@ import fallbackSvg from "../assets/placeholder.svg";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import diagrams from "../data/diagrams.json";
 
+// ✨ glossary hovers
+import glossary from "../data/glossary.json";
+import TermTag from "../components/TermTag.jsx";
+
 // Eagerly import all assets for full-size diagram resolution
 const assetUrls = import.meta.glob("../assets/*.{svg,png,jpg,jpeg,webp}", {
   eager: true,
@@ -68,71 +72,51 @@ export default function Diagram() {
     URL.revokeObjectURL(url);
   };
 
-// ----- Download: PNG (render SVG -> canvas -> png) -----
-const handleDownloadPNG = async () => {
-  const svgText = await (await fetch(svgUrl)).text();
+  // ----- Download: PNG (render SVG -> canvas -> png) -----
+  const handleDownloadPNG = async () => {
+    const svgText = await (await fetch(svgUrl)).text();
+    const { w, h } = getSvgSize(svgText);
 
-  // Get a reliable drawing size from width/height or viewBox
-  const getSvgSize = (text) => {
-    const w = text.match(/width="([\d.]+)(px)?"/i);
-    const h = text.match(/height="([\d.]+)(px)?"/i);
-    if (w && h) return { w: parseFloat(w[1]), h: parseFloat(h[1]) };
-    const vb = text.match(/viewBox="([\d.\s-]+)"/i);
-    if (vb) {
-      const [, box] = vb;
-      const parts = box.trim().split(/\s+/).map(Number);
-      if (parts.length === 4) return { w: parts[2], h: parts[3] };
+    // 2x scale for crisp PNG
+    const scale = 2;
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.round(w * scale);
+    canvas.height = Math.round(h * scale);
+
+    const ctx = canvas.getContext("2d", { alpha: true });
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
+
+    // Use a Blob URL to avoid cross-origin taint
+    const blob = new Blob([svgText], { type: "image/svg+xml;charset=utf-8" });
+    const blobUrl = URL.createObjectURL(blob);
+
+    try {
+      const img = new Image();
+      img.src = blobUrl;
+      await img.decode(); // ensure fully decoded
+
+      // Draw the SVG scaled to full canvas (prevents clipping)
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      canvas.toBlob((pngBlob) => {
+        const url = URL.createObjectURL(pngBlob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${entry.slug}.png`; // ✅ was meta.slug before
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      }, "image/png");
+    } catch (e) {
+      console.error(e);
+      alert("Sorry, PNG export failed.");
+    } finally {
+      URL.revokeObjectURL(blobUrl);
     }
-    return { w: 1200, h: 800 }; // sensible fallback
   };
 
-  const { w, h } = getSvgSize(svgText);
-
-  // 2x scale for crisp PNG
-  const scale = 2;
-  const canvas = document.createElement("canvas");
-  canvas.width = Math.round(w * scale);
-  canvas.height = Math.round(h * scale);
-
-  const ctx = canvas.getContext("2d", { alpha: true });
-  ctx.imageSmoothingEnabled = true;
-  ctx.imageSmoothingQuality = "high";
-
-  // Use a Blob URL to avoid cross-origin taint
-  const blob = new Blob([svgText], { type: "image/svg+xml;charset=utf-8" });
-  const blobUrl = URL.createObjectURL(blob);
-
-  try {
-    const img = new Image();
-    img.src = blobUrl;
-
-    // Ensure the image is decoded before drawing (prevents partial draws/clipping)
-    await img.decode();
-
-    // Optional: clear / paint background (uncomment to force a background color)
-    // ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--cds-layer') || '#ffffff';
-    // ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    // Draw the SVG scaled to the full canvas size (prevents clipping)
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-    canvas.toBlob((pngBlob) => {
-      const url = URL.createObjectURL(pngBlob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `${meta.slug}.png`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-    }, "image/png");
-  } catch (e) {
-    console.error(e);
-    alert("Sorry, PNG export failed.");
-  } finally {
-    URL.revokeObjectURL(blobUrl);
-  }
-};
   return (
     <div style={{ padding: "1rem" }}>
       <Crumb
@@ -182,6 +166,19 @@ const handleDownloadPNG = async () => {
             {/* Caption */}
             <div className="figure__caption t-helper-text-01" style={{ marginTop: "0.5rem" }}>
               {entry.caption || entry.desc}
+            </div>
+
+            {/* 🔍 Key terms with hover tooltips */}
+            <div
+              className="t-helper-text-01"
+              style={{ marginTop: "0.75rem", color: "var(--cds-text-secondary)" }}
+            >
+              Key terms:
+            </div>
+            <div style={{ marginTop: "0.25rem", display: "flex", gap: "0.4rem", flexWrap: "wrap" }}>
+              {glossary.map((g) => (
+                <TermTag key={g.key} term={g.key} label={g.label} desc={g.desc} />
+              ))}
             </div>
 
             {/* Actions */}
