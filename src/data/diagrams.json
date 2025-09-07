@@ -9,7 +9,7 @@
   },
   {
     "slug": "context-engineering",
-    "title": "Context engineering over Multimodal RAG",
+    "title": "Context engineering over multimodal RAG",
     "desc": "Carbon-styled flow: strategy → components → assembly → analyzer → fusion → generation.",
     "thumb": null,
     "tags": ["context", "rag", "systems"],

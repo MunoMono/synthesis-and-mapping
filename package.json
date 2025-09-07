@@ -13,7 +13,8 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "draw": "bash scripts/draw.sh",
-    "draw:all": "bash scripts/build-all.sh"
+    "draw:all": "bash scripts/build-all.sh",
+    "embed:plex": "node scripts/embed-plex-in-svg.mjs"
   },
   "dependencies": {
     "@carbon/icons-react": "^11.66.0",
