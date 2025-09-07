@@ -6,6 +6,7 @@
   "homepage": "https://MunoMono.github.io/synthesis-and-mapping",
   "scripts": {
     "dev": "vite",
+    "prebuild": "npm run embed:plex -- src/assets/*.svg",
     "build": "vite build",
     "postbuild": "cp dist/index.html dist/404.html",
     "lint": "eslint .",
