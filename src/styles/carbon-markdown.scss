@@ -1,0 +1,166 @@
+// src/styles/components/_carbon-markdown.scss
+@use '@carbon/styles/scss/type' as type;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *; // <-- use theme vars ($text-primary, $layer-01, ...)
+
+.carbon-markdown {
+  color: $text-primary;
+  @include type.type-style('body-01');
+  line-height: 1.6;
+
+  // Headings
+  h1 { @include type.type-style('heading-05'); margin: $spacing-07 0 $spacing-05; color: $text-primary; }
+  h2 {
+  @include type.type-style('heading-04');
+  margin: $spacing-06 0 $spacing-04;
+  color: $text-primary;
+  margin-bottom: 2rem;
+  font-weight: 550 !important;
+}
+  h3 { @include type.type-style('heading-03'); margin: $spacing-05 0 $spacing-03; color: $text-primary; }
+  h4 { @include type.type-style('heading-02'); margin: $spacing-04 0 $spacing-03; color: $text-primary; }
+  h5, h6 { @include type.type-style('heading-01'); margin: $spacing-04 0 $spacing-02; color: $text-secondary; }
+
+  // Paragraphs
+  p { margin-bottom: $spacing-05; }
+  strong { font-weight: 600; }
+  em { font-style: italic; }
+
+  // Links
+  a {
+    color: $link-primary;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    &:hover { color: $link-primary-hover; }
+    &:visited { color: $link-visited; }
+    &:focus-visible {
+      outline: 2px solid $focus;
+      outline-offset: 2px;
+      text-decoration: none;
+    }
+  }
+
+  // Unordered lists (Carbon dash bullets)
+  ul {
+    margin-bottom: $spacing-05;
+    padding-left: $spacing-06;
+    list-style: none;
+
+    li {
+      position: relative;
+      margin-bottom: $spacing-02;
+      @include type.type-style('body-01');
+
+      &::before {
+        content: "–";
+        position: absolute;
+        left: -$spacing-05;
+        color: $text-primary;
+      }
+
+      ul { margin-top: $spacing-02; } // nested lists
+    }
+  }
+
+  // Ordered lists
+  ol {
+    margin-bottom: $spacing-05;
+    padding-left: $spacing-06;
+    list-style: decimal;
+
+    li {
+      margin-bottom: $spacing-02;
+      @include type.type-style('body-01');
+    }
+  }
+
+  // Blockquotes
+  blockquote {
+    margin: $spacing-05 0;
+    padding: $spacing-04 $spacing-05;
+    background: $layer-01;
+    border-left: 4px solid $border-interactive;
+    color: $text-secondary;
+    @include type.type-style('body-01');
+    p { margin: 0; }
+    > :not(:first-child) { margin-top: $spacing-03; }
+  }
+
+  // Code
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: .95em;
+  }
+  :not(pre) > code {
+    background: $layer-01;
+    padding: .15rem .35rem;
+    border-radius: .25rem;
+    border: 1px solid $border-subtle;
+  }
+  pre {
+    background: $layer-01;
+    padding: $spacing-05;
+    border-radius: .5rem;
+    border: 1px solid $border-subtle;
+    overflow: auto;
+    margin: $spacing-05 0;
+    code { background: transparent; border: 0; padding: 0; }
+  }
+
+  // Tables
+  table { width: 100%; border-collapse: collapse; margin: $spacing-05 0; }
+  thead th {
+    @include type.type-style('label-01');
+    text-align: left;
+    background: $layer-01;
+    color: $text-secondary;
+    border-bottom: 1px solid $border-subtle;
+    padding: $spacing-03 $spacing-04;
+  }
+  tbody td {
+    border-bottom: 1px solid $border-subtle;
+    padding: $spacing-03 $spacing-04;
+    vertical-align: top;
+  }
+  caption {
+    @include type.type-style('helper-text-01');
+    color: $text-helper;
+    margin-bottom: $spacing-03;
+    text-align: left;
+  }
+
+  // Images
+  img { max-width: 100%; height: auto; display: block; margin: $spacing-05 0; }
+
+  // Horizontal rule
+  hr { border: 0; border-top: 1px solid $border-subtle; margin: $spacing-07 0; }
+
+  // Callouts (::note / ::tip / ::warning)
+  .cds-callout {
+    background: $layer-01;
+    border-left: 4px solid $interactive;
+    padding: $spacing-04 $spacing-05;
+    border-radius: .25rem;
+    margin: $spacing-05 0;
+
+    .cds-callout__title {
+      @include type.type-style('label-01');
+      color: $text-secondary;
+      margin-bottom: $spacing-02;
+    }
+    .cds-callout__body {
+      @include type.type-style('body-01');
+      color: $text-primary;
+    }
+  }
+  .cds-callout--note    { border-color: $border-interactive; }
+  .cds-callout--tip     { border-color: $support-success; }
+  .cds-callout--warning { border-color: $support-warning; }
+
+  // Mobile type scaling (optional)
+  @media (max-width: 640px) {
+    h1 { @include type.type-style('heading-04'); }
+    h2 { @include type.type-style('heading-03'); }
+    h3 { @include type.type-style('heading-02'); }
+  }
+}

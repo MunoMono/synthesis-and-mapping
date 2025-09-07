@@ -7,6 +7,7 @@
 @use '@carbon/styles/scss/themes' as *;       /* $g10, $g90, $g100 */
 @use '@carbon/styles/scss/theme';             /* theme() -> CSS vars */
 @use '@carbon/styles/scss/colors' as colors;  /* $blue-40, $magenta-40, ... */
+@use './carbon-markdown';
 
 /* Your local type utility classes (keep) */
 @use './typography';

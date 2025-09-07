@@ -5,15 +5,18 @@ import Crumb from "../components/Crumb.jsx";
 import fallbackSvg from "../assets/placeholder.svg";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import diagrams from "../data/diagrams.json";
+import { marked } from "marked";
 
-// ✨ glossary hovers
-import glossary from "../data/glossary.json";
-import TermTag from "../components/TermTag.jsx";
-
-// Eagerly import all assets for full-size diagram resolution
+// Resolve diagram asset URLs (eager for GH Pages)
 const assetUrls = import.meta.glob("../assets/*.{svg,png,jpg,jpeg,webp}", {
   eager: true,
   as: "url",
+});
+
+// Resolve per-diagram annotations as raw markdown (eager)
+const annotationModules = import.meta.glob("../assets/annotations/*.md", {
+  eager: true,
+  as: "raw",
 });
 
 function resolveEntry(slug) {
@@ -22,15 +25,19 @@ function resolveEntry(slug) {
 
 function resolveDiagramUrl(entry) {
   if (!entry) return fallbackSvg;
-  // prefer explicit file if present
   if (entry.file && assetUrls[`../assets/${entry.file}`]) {
     return assetUrls[`../assets/${entry.file}`];
   }
-  // default to slug.svg in /src/assets
   return assetUrls[`../assets/${entry.slug}.svg`] || fallbackSvg;
 }
 
-// parse width/height from SVG text; fall back to viewBox or defaults
+function resolveAnnotationMd(entry) {
+  if (!entry) return null;
+  const name = entry.annotation || `${entry.slug}.md`;
+  return annotationModules[`../assets/annotations/${name}`] || null;
+}
+
+// Parse width/height from SVG text; fall back to viewBox or defaults
 function getSvgSize(svgText) {
   const widthMatch = svgText.match(/width="([\d.]+)(px)?"/i);
   const heightMatch = svgText.match(/height="([\d.]+)(px)?"/i);
@@ -43,11 +50,12 @@ function getSvgSize(svgText) {
     const parts = vb.trim().split(/\s+/).map(Number);
     if (parts.length === 4) return { w: parts[2], h: parts[3] };
   }
-  return { w: 1200, h: 800 }; // sensible default
+  return { w: 1200, h: 800 };
 }
 
 export default function Diagram() {
   const { slug } = useParams();
+
   const entry =
     resolveEntry(slug) ||
     resolveEntry("interpretivist-research-process") || {
@@ -57,8 +65,10 @@ export default function Diagram() {
     };
 
   const svgUrl = resolveDiagramUrl(entry);
+  const annotationMd = resolveAnnotationMd(entry);
+  const annotationHtml = annotationMd ? marked.parse(annotationMd) : null;
 
-  // ----- Download: SVG (as-is) -----
+  // Download SVG as-is
   const handleDownloadSVG = async () => {
     const res = await fetch(svgUrl);
     const blob = await res.blob();
@@ -72,13 +82,12 @@ export default function Diagram() {
     URL.revokeObjectURL(url);
   };
 
-  // ----- Download: PNG (render SVG -> canvas -> png) -----
+  // Render SVG to Canvas → PNG (no clipping)
   const handleDownloadPNG = async () => {
     const svgText = await (await fetch(svgUrl)).text();
     const { w, h } = getSvgSize(svgText);
 
-    // 2x scale for crisp PNG
-    const scale = 2;
+    const scale = 2; // crisp
     const canvas = document.createElement("canvas");
     canvas.width = Math.round(w * scale);
     canvas.height = Math.round(h * scale);
@@ -87,23 +96,21 @@ export default function Diagram() {
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = "high";
 
-    // Use a Blob URL to avoid cross-origin taint
     const blob = new Blob([svgText], { type: "image/svg+xml;charset=utf-8" });
     const blobUrl = URL.createObjectURL(blob);
 
     try {
       const img = new Image();
       img.src = blobUrl;
-      await img.decode(); // ensure fully decoded
+      await img.decode();
 
-      // Draw the SVG scaled to full canvas (prevents clipping)
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
       canvas.toBlob((pngBlob) => {
         const url = URL.createObjectURL(pngBlob);
         const a = document.createElement("a");
         a.href = url;
-        a.download = `${entry.slug}.png`; // ✅ was meta.slug before
+        a.download = `${entry.slug}.png`;
         document.body.appendChild(a);
         a.click();
         a.remove();
@@ -168,18 +175,14 @@ export default function Diagram() {
               {entry.caption || entry.desc}
             </div>
 
-            {/* 🔍 Key terms with hover tooltips */}
-            <div
-              className="t-helper-text-01"
-              style={{ marginTop: "0.75rem", color: "var(--cds-text-secondary)" }}
-            >
-              Key terms:
-            </div>
-            <div style={{ marginTop: "0.25rem", display: "flex", gap: "0.4rem", flexWrap: "wrap" }}>
-              {glossary.map((g) => (
-                <TermTag key={g.key} term={g.key} label={g.label} desc={g.desc} />
-              ))}
-            </div>
+            {/* Per-diagram annotations (Markdown) */}
+            {annotationHtml && (
+              <div
+                className="carbon-markdown"
+                style={{ marginTop: "1rem" }}
+                dangerouslySetInnerHTML={{ __html: annotationHtml }}
+              />
+            )}
 
             {/* Actions */}
             <div style={{ marginTop: "0.75rem", display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
