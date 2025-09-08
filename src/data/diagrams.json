@@ -4,7 +4,11 @@
     "title": "Interpretivist research process",
     "desc": "PhD research flow diagram (interpretivist paradigm)",
     "thumb": "interpretivist-research-process.svg",
-    "tags": ["research", "methodology", "interpretivism"],
+    "tags": [
+      "research",
+      "methodology",
+      "interpretivism"
+    ],
     "date": "2025-09-05"
   },
   {
@@ -12,27 +16,90 @@
     "title": "Context engineering over multimodal RAG",
     "desc": "Carbon-styled flow: strategy → components → assembly → analyzer → fusion → generation.",
     "thumb": null,
-    "tags": ["context", "rag", "systems"],
+    "tags": [
+      "context",
+      "rag",
+      "systems"
+    ],
     "date": "2025-09-05",
     "spec": {
       "direction": "DOWN",
       "nodes": [
-        { "id": "A", "label": "Context strategy",              "accentVar": "--sm-accent-strategy" },
-        { "id": "B", "label": "Context components",            "accentVar": "--sm-accent-input" },
-        { "id": "D", "label": "Assembly and optimisation",       "accentVar": "--sm-accent-fuse" },
-        { "id": "E", "label": "RAG query analyzer",            "accentVar": "--sm-accent-method" },
-        { "id": "G", "label": "Fusion layer",                  "accentVar": "--sm-accent-fuse" },
-        { "id": "H", "label": "LLM generator" },
-        { "id": "I", "label": "Final answer" }
+        {
+          "id": "A",
+          "label": "Context strategy",
+          "accentVar": "--sm-accent-strategy"
+        },
+        {
+          "id": "B",
+          "label": "Context components",
+          "accentVar": "--sm-accent-input"
+        },
+        {
+          "id": "D",
+          "label": "Assembly and optimisation",
+          "accentVar": "--sm-accent-fuse"
+        },
+        {
+          "id": "E",
+          "label": "RAG query analyzer",
+          "accentVar": "--sm-accent-method"
+        },
+        {
+          "id": "G",
+          "label": "Fusion layer",
+          "accentVar": "--sm-accent-fuse"
+        },
+        {
+          "id": "H",
+          "label": "LLM generator"
+        },
+        {
+          "id": "I",
+          "label": "Final answer"
+        }
       ],
       "edges": [
-        { "source": "A", "target": "B", "accentVar": "--sm-accent-strategy" },
-        { "source": "B", "target": "D" },
-        { "source": "D", "target": "E", "accentVar": "--sm-accent-method" },
-        { "source": "E", "target": "G", "accentVar": "--sm-accent-fuse" },
-        { "source": "G", "target": "H" },
-        { "source": "H", "target": "I" }
+        {
+          "source": "A",
+          "target": "B",
+          "accentVar": "--sm-accent-strategy"
+        },
+        {
+          "source": "B",
+          "target": "D"
+        },
+        {
+          "source": "D",
+          "target": "E",
+          "accentVar": "--sm-accent-method"
+        },
+        {
+          "source": "E",
+          "target": "G",
+          "accentVar": "--sm-accent-fuse"
+        },
+        {
+          "source": "G",
+          "target": "H"
+        },
+        {
+          "source": "H",
+          "target": "I"
+        }
       ]
     }
+  },
+  {
+    "slug": "integrated-research-mapping-spine",
+    "title": "Integrated research mapping",
+    "desc": "Venn of archival analysis, practice-based intervention, and computational modelling",
+    "thumb": "integrated-research-mapping-spine.svg",
+    "tags": [
+      "'systems'",
+      "'blueprint'",
+      "'roadmap'"
+    ],
+    "date": "2025-09-08"
   }
 ]
