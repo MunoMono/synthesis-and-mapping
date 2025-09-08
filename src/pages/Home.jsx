@@ -1,89 +1,102 @@
-import { Grid, Column, ClickableTile, Heading, Tag } from "@carbon/react";
+// src/pages/Home.jsx
 import { Link } from "react-router-dom";
+import { Grid, Column, Heading } from "@carbon/react";
 import Crumb from "../components/Crumb.jsx";
 import { formatDate } from "../utils/formatDate.js";
-import fallbackThumb from "../assets/placeholder.svg";
 import diagrams from "../data/diagrams.json";
 
-// Eagerly import all assets in src/assets and get their URLs
-// JSON can list "thumb": "filename.svg"
+// Resolve thumbnails from src/assets at build time
 const assetUrls = import.meta.glob("../assets/*.{svg,png,jpg,jpeg,webp}", {
   eager: true,
   as: "url",
 });
 
-// Normalize JSON → items used by UI
-const items = diagrams.map((d) => {
-  const resolvedThumb =
-    assetUrls[`../assets/${d.thumb}`] ||
-    assetUrls[`../assets/${d.slug}.svg`] ||
-    fallbackThumb;
-
-  return {
-    ...d,
-    thumb: resolvedThumb,
-  };
-});
+// --- helpers ---------------------------------------------------------------
+function ensureAssetsPrefix(path) {
+  return path?.startsWith("assets/") ? path : `assets/${path}`;
+}
+function resolveThumbUrl(entry) {
+  // Prefer explicit file, then thumb; support src/assets and /public/assets
+  const candidate = entry.file || entry.thumb;
+  if (candidate) {
+    const rel = `../${ensureAssetsPrefix(candidate)}`;
+    if (assetUrls[rel]) return assetUrls[rel];       // bundled from src/assets
+    return `/${ensureAssetsPrefix(candidate)}`;       // served from /public/assets
+  }
+  // final fallback: try slug.svg (src then public)
+  const slugSrc = `../assets/${entry.slug}.svg`;
+  if (assetUrls[slugSrc]) return assetUrls[slugSrc];
+  return `/assets/${entry.slug}.svg`;
+}
 
 export default function Home() {
+  const items = diagrams.slice().sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+
   return (
     <div style={{ padding: "1rem" }}>
       <Crumb trail={[{ label: "Home", isCurrentPage: true }]} />
 
       <Grid fullWidth narrow style={{ marginTop: "1rem" }}>
         <Column lg={16} md={8} sm={4}>
-          <Heading
-            as="h1"
-            className="t-heading-03"
-            style={{ marginBottom: "1rem" }}
-          >
-            Diagramming the research process with visual communication
-          </Heading>
+          <Heading as="h1" className="t-heading-03">Diagrams</Heading>
         </Column>
 
         <Column lg={16} md={8} sm={4}>
-          <div className="cardGrid">
-            {items.map((d) => (
-              <Link
-                key={d.slug}
-                to={`/diagram/${d.slug}`}
-                style={{ textDecoration: "none", color: "inherit" }}
-              >
-                <ClickableTile style={{ padding: "1rem" }}>
-                  <img
-                    src={d.thumb}
-                    alt={`${d.title} thumbnail`}
-                    className="figure__image"
-                  />
-                  <div style={{ marginTop: "0.75rem", fontWeight: 600 }}>
-                    {d.title}
-                  </div>
-                  <div style={{ marginTop: "0.25rem" }}>{d.desc}</div>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
+              gap: "1rem",
+              marginTop: "1rem",
+            }}
+          >
+            {items.map((d) => {
+              const url = resolveThumbUrl(d);
+              return (
+                <Link
+                  key={d.slug}
+                  to={`/diagram/${d.slug}`}
+                  style={{
+                    border: "1px solid var(--cds-border-subtle)",
+                    background: "var(--cds-layer)",
+                    borderRadius: "0.5rem",
+                    textDecoration: "none",
+                    color: "inherit",
+                    overflow: "hidden",
+                    display: "block",
+                  }}
+                  aria-label={`Open ${d.title}`}
+                >
                   <div
                     style={{
-                      marginTop: "0.5rem",
+                      aspectRatio: "4 / 3",
                       display: "flex",
-                      gap: "0.25rem",
-                      flexWrap: "wrap",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      overflow: "hidden",
+                      background: "var(--cds-layer-accent)",
                     }}
                   >
-                    {d.tags.map((t) => (
-                      <Tag key={t}>{t}</Tag>
-                    ))}
+                    {/* Works for JPG/PNG/SVG; SVGs will render as images */}
+                    <img
+                      src={url}
+                      alt={d.title}
+                      style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                      loading="lazy"
+                    />
                   </div>
-                  {/* Date line (Carbon label-01 via token class) */}
-                  <div
-                    className="t-helper-text-01"
-                    style={{
-                      marginTop: "0.75rem",
-                      color: "var(--cds-text-secondary)",
-                    }}
-                  >
-                    Posted: {formatDate(d.date)}
-                  </div>{" "}
-                </ClickableTile>
-              </Link>
-            ))}
+                  <div style={{ padding: "0.75rem" }}>
+                    <div style={{ fontWeight: 600 }}>{d.title}</div>
+                    <div style={{ fontSize: "0.85rem", opacity: 0.7, marginTop: "0.25rem" }}>
+                      {d.desc}
+                    </div>
+                    <div style={{ fontSize: "0.8rem", opacity: 0.6, marginTop: "0.25rem" }}>
+                      {d.date ? formatDate(d.date) : ""}
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </Column>
       </Grid>
