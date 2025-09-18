@@ -102,13 +102,30 @@
     ],
     "date": "2025-09-08"
   },
+  {
+    "slug": "brainstorm01",
+    "title": "Research brainstorm",
+    "desc": "Context → Research question, Interpretivism and critical theory → Research question, and Taxonomic classification",
+    "file": "assets/brainstorm01.jpg",
+    "thumb": "assets/brainstorm01.jpg",
+    "tags": [
+      "Context",
+      "Theory",
+      "Taxonomy"
+    ],
+    "date": "2025-09-08"
+  },
 {
-  "slug": "brainstorm01",
-  "title": "Research brainstorm",
-  "desc": "Context → Research question, Interpretivism and critical theory → Research question, and Taxonomic classification",
-  "file": "assets/brainstorm01.jpg",
-  "thumb": "assets/brainstorm01.jpg",
-  "tags": ["Context","Theory","Taxonomy"],
-  "date": "2025-09-08"
+  "slug": "api-network-map",
+  "title": "API flow",
+  "desc": "Flow of Cooper Hewitt GraphQL API requests through Vite, Cloudflare, and S3/Postgres.",
+  "file": "assets/apiflow.svg",
+  "thumb": "assets/apiflow.svg",
+  "tags": [
+    "api",
+    "cooper-hewitt",
+    "infrastructure"
+  ],
+  "date": "2025-09-18"
 }
 ]
