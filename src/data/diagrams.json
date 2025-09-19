@@ -115,17 +115,44 @@
     ],
     "date": "2025-09-08"
   },
-{
-  "slug": "api-network-map",
-  "title": "API flow",
-  "desc": "Flow of Cooper Hewitt GraphQL API requests through Vite, Cloudflare, and S3/Postgres.",
-  "file": "assets/apiflow.svg",
-  "thumb": "assets/apiflow.svg",
-  "tags": [
-    "api",
-    "cooper-hewitt",
-    "infrastructure"
-  ],
-  "date": "2025-09-18"
-}
+  {
+    "slug": "api-network-map",
+    "title": "API flow",
+    "desc": "Flow of Cooper Hewitt GraphQL API requests through Vite, Cloudflare, and S3/Postgres.",
+    "file": "assets/apiflow.svg",
+    "thumb": "assets/apiflow.svg",
+    "tags": [
+      "api",
+      "cooper-hewitt",
+      "infrastructure"
+    ],
+    "date": "2025-09-18"
+  },
+  {
+    "slug": "taxonomy",
+    "title": "Taxonomy",
+    "desc": "Imported from Miro (PDF → SVG)",
+    "file": "assets/taxonomy.svg",
+    "thumb": "assets/taxonomy.svg",
+    "tags": [
+      "miro",
+      "import"
+    ],
+    "date": "2025-09-19"
+  },
+  {
+    "slug": "ddr-taxonomy",
+    "title": "DDR taxonomy repository map",
+    "desc": "Faceted overview of the DDR repository by member, year, project, event, unit, theme, funder, paradigm, location, and impact/type.",
+    "thumb": "taxonomy.svg",
+    "tags": [
+      "\"taxonomy\"",
+      "\"ddr\"",
+      "\"rca\"",
+      "\"mapping\"",
+      "\"miro\"",
+      "\"export\""
+    ],
+    "date": "2025-09-19"
+  }
 ]

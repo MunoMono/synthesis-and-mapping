@@ -17,7 +17,8 @@
     "draw:md": "python3 scripts/draw.py -i src/assets/diagrams --outdir src/assets",
     "draw:mmd": "node scripts/render-mermaid.mjs",
     "watch:mmd": "node scripts/render-mermaid.mjs --watch",
-    "draw:all": "npm run draw:md && npm run draw:mmd"
+    "draw:all": "npm run draw:md && npm run draw:mmd",
+    "convert:miro": "python3 scripts/pdf2svg.py"
   },
   "dependencies": {
     "@carbon/icons-react": "^11.66.0",
