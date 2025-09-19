@@ -131,27 +131,12 @@
   {
     "slug": "taxonomy",
     "title": "Taxonomy",
-    "desc": "Imported from Miro (PDF → SVG)",
+    "desc": "Faceted overview of the DDR repository by member, year, project, event, unit, theme, funder, paradigm, location, and impact/type.",
     "file": "assets/taxonomy.svg",
     "thumb": "assets/taxonomy.svg",
     "tags": [
       "miro",
       "import"
-    ],
-    "date": "2025-09-19"
-  },
-  {
-    "slug": "ddr-taxonomy",
-    "title": "DDR taxonomy repository map",
-    "desc": "Faceted overview of the DDR repository by member, year, project, event, unit, theme, funder, paradigm, location, and impact/type.",
-    "thumb": "taxonomy.svg",
-    "tags": [
-      "\"taxonomy\"",
-      "\"ddr\"",
-      "\"rca\"",
-      "\"mapping\"",
-      "\"miro\"",
-      "\"export\""
     ],
     "date": "2025-09-19"
   }

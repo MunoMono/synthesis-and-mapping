@@ -1,4 +1,3 @@
-
 # Synthesis and Mapping
 
 Visual representation of the research project using the **IBM Carbon Design System** with **React + Vite** and a custom **Markdown → SVG diagramming pipeline**.
@@ -16,6 +15,7 @@ This app showcases **system diagrams, mind maps, and visual tools** to explore c
 - **Breadcrumb navigation**
 - **Interactive diagrams** (zoom / pan / pinch with trackpad or mobile)
 - **Custom diagramming pipeline**: write diagrams in Markdown, render them as Carbon-styled SVG with Python
+- **Miro PDF → SVG pipeline**: export diagrams from Miro as PDF, auto-convert to SVG for use in the app
 - Deployed automatically to **GitHub Pages**
 
 ---
@@ -41,7 +41,7 @@ This project uses a Python-based diagram generator.
 
 - **macOS**:
   ```bash
-  brew install graphviz
+  brew install graphviz pdf2svg
   ```
 
 - **Python deps**:
@@ -61,37 +61,23 @@ Open <http://localhost:5173> in your browser.
 
 ## 🛠 Diagramming Workflow
 
+### Markdown → SVG
+
 Diagrams are defined as **Markdown specs** inside:
 
 ```
 src/assets/diagrams/
 ```
 
-Each file contains a flowchart block (Mermaid-like syntax) with optional front-matter config and Carbon color classes, for example:
+Each file contains a flowchart block (Mermaid-like syntax) with optional front-matter config and Carbon color classes.
 
-```markdown
----
-config:
-  layout: dagre
----
-flowchart TD
-  A["Context Engineering Strategy"] --> B{"Context Components"}
-  B --> C1["cinstr"] & C2["cknow"]
-  A:::carbonPink
-  B:::carbonDefault
-  C1:::carbonBlue
-  C2:::carbonBlue
-  classDef carbonPink fill:#ff7eb6,stroke:#393939,color:#161616
-  classDef carbonBlue fill:#78a9ff,stroke:#393939,color:#161616
-```
-
-### Render a single diagram
+#### Render a single diagram
 
 ```bash
 python3 scripts/draw.py   -i src/assets/diagrams/context-engineering.md   -o src/assets/context-engineering.svg
 ```
 
-### Render all diagrams
+#### Render all diagrams
 
 ```bash
 python3 scripts/draw.py -i src/assets/diagrams --outdir src/assets
@@ -101,13 +87,44 @@ SVG outputs are written into `src/assets/` and displayed in the app.
 
 ---
 
+### Miro PDF → SVG
+
+You can also drop Miro exports (PDF) into:
+
+```
+src/assets/miro-pdfs/
+```
+
+Convert them into SVG with:
+
+```bash
+npm run convert:miro
+```
+
+This uses the helper script `scripts/pdf2svg.py` and `pdf2svg` under the hood.
+
+Outputs go into:
+
+```
+src/assets/*.svg
+```
+
+and can then be registered into the gallery with:
+
+```bash
+python3 scripts/newgraphic.py
+```
+
+---
+
 ## 🛠 Useful Commands
 
 - **Run locally** → `npm run dev`  
 - **Build for production** → `npm run build` (output goes to `/dist`)  
 - **Preview production build locally** → `npm run preview`  
 - **Deploy to GitHub Pages** → `npm run deploy`  
-- **Render all diagrams** → `npm run draw` (alias for the Python script)
+- **Render all diagrams** → `npm run draw` (alias for the Python script)  
+- **Convert Miro PDFs** → `npm run convert:miro`  
 
 ---
 
@@ -150,7 +167,7 @@ This will:
 This project is part of my PhD research at the **Royal College of Art**.  
 It provides a framework to **visualise complexity** through world-class diagrams, styled consistently using IBM Carbon Design System.
 
-Diagrams are now authored in **Markdown**, rendered with a custom **Python + Graphviz pipeline**, and displayed as **interactive Carbon-styled SVGs**.
+Diagrams are now authored in **Markdown**, exported from **Miro (PDF → SVG)**, rendered with a custom **Python + Graphviz pipeline**, and displayed as **interactive Carbon-styled SVGs**.
 
 ---
 
