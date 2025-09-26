@@ -4,22 +4,16 @@ from graphviz import Digraph
 
 # =========================
 #  Typography token presets
-#  (approx Carbon v11 sizes)
-#  Use with nodes as extra classes, e.g.  A:::carbonBlue:::t-heading-02
 # =========================
 TYPE_TOKENS = {
-    # Labels / helper
     "t-label-01":       {"fontsize": "12", "fontname": "IBM Plex Sans"},
     "t-helper-text-01": {"fontsize": "12", "fontname": "IBM Plex Sans"},
-    # Body
     "t-body-01":        {"fontsize": "14", "fontname": "IBM Plex Sans"},
     "t-body-02":        {"fontsize": "16", "fontname": "IBM Plex Sans"},
     "t-body-compact-01":{"fontsize": "13", "fontname": "IBM Plex Sans"},
     "t-body-compact-02":{"fontsize": "15", "fontname": "IBM Plex Sans"},
-    # Code
     "t-code-01":        {"fontsize": "12", "fontname": "IBM Plex Mono"},
     "t-code-02":        {"fontsize": "14", "fontname": "IBM Plex Mono"},
-    # Headings (SemiBold if installed; Graphviz will fall back)
     "t-heading-01":     {"fontsize": "16", "fontname": "IBM Plex Sans SemiBold"},
     "t-heading-02":     {"fontsize": "20", "fontname": "IBM Plex Sans SemiBold"},
     "t-heading-03":     {"fontsize": "24", "fontname": "IBM Plex Sans SemiBold"},
@@ -36,7 +30,6 @@ def unquote(s: str) -> str:
     return s
 
 def parse_markdown(md: str):
-    # front-matter
     cfg = {}
     m = re.match(r'^---\s*\n([\s\S]*?)\n---\s*\n?', md)
     if m:
@@ -47,7 +40,6 @@ def parse_markdown(md: str):
             cfg = {}
         md = md[m.end():]
 
-    # flowchart body (fenced or unfenced)
     fenced = re.search(r'```(?:flowchart|mermaid)\s+([\s\S]*?)```', md, flags=re.M)
     if fenced:
         body = fenced.group(1)
@@ -61,12 +53,7 @@ def parse_markdown(md: str):
 
     direction = (head.group(1).upper() if head else 'TD')
 
-    # id -> {label, shape, classes:[...]}
-    nodes = {}
-    # edges: (src, dst)
-    edges = []
-    # classes: name -> {fill, stroke, color, fontname?, fontsize?}
-    classes = {}
+    nodes, edges, classes = {}, [], {}
 
     def ensure(nid):
         if nid not in nodes:
@@ -77,11 +64,9 @@ def parse_markdown(md: str):
         if not line or line.startswith('%') or re.match(r'^(flowchart|graph)\b', line, re.I):
             continue
 
-        # classDef NAME fill:#..,stroke:#..,color:#..[,fontname:"IBM Plex Sans",fontsize:14]
         m = re.match(r'^classDef\s+([A-Za-z0-9_-]+)\s+(.+)$', line, flags=re.I)
         if m:
             name = m.group(1)
-            # split top-level commas but allow colons inside quotes
             parts = [p.strip() for p in m.group(2).split(',') if ':' in p]
             kv = {}
             for p in parts:
@@ -96,27 +81,23 @@ def parse_markdown(md: str):
             }
             continue
 
-        # class attach: A:::cls or A:::colorClass:::typeClass
         m = re.match(r'^([A-Za-z0-9_-]+)\s*:::\s*([A-Za-z0-9_:.\-]+)$', line)
         if m:
             nid, rest = m.group(1), m.group(2)
             n = ensure(nid)
             toks = [t for t in rest.split(":::") if t]
-            # de-dup while preserving order
             seen = set()
             n["classes"] = [t for t in (n["classes"] + toks) if (t not in seen and not seen.add(t))]
             continue
 
-        # node declaration: A["Label"] | B{ "Decision" }
         m = re.match(r'^([A-Za-z0-9_-]+)\s*((\[[^\]]+\])|(\{[^}]+\}))$', line)
         if m:
             nid, part = m.group(1), m.group(2)
             n = ensure(nid)
             n["shape"] = "diamond" if part.startswith("{") else "rect"
-            n["label"] = unquote(part[1:-1].strip())
+            n["label"] = unquote(part[1:-1].strip())  # <-- keep explicit labels
             continue
 
-        # edges (allow grouped RHS via "&"): A --> B & C & D
         m = re.match(r'^(.+?)\s*-->\s*(.+)$', line)
         if m:
             lhs, rhs = m.group(1).strip(), m.group(2).strip()
@@ -151,7 +132,7 @@ def parse_markdown(md: str):
         "config": cfg or {}
     }
 
-# ---------- rendering (Graphviz) ----------
+# ---------- rendering ----------
 CARBON = {
     "layer":  "#161616",
     "border": "#393939",
@@ -159,33 +140,26 @@ CARBON = {
 }
 
 def color_style(classes_list, classes_map):
-    """
-    Pick the first class that has a classDef; pass through fill/stroke/color,
-    AND typography props (fontname, fontsize) if present.
-    """
     if classes_list:
         for c in classes_list:
             if c in classes_map:
                 cc = classes_map[c]
                 return {
-                    "fillcolor": cc.get("fill")     or CARBON["layer"],
-                    "color":     cc.get("stroke")   or CARBON["edge"],
+                    "fillcolor": cc.get("fill")     or "#f4f4f4",
+                    "color":     cc.get("stroke")   or CARBON["border"],
                     "fontcolor": cc.get("color")    or "#161616",
                     "fontname":  cc.get("fontname"),
                     "fontsize":  cc.get("fontsize"),
                 }
     return {
-        "fillcolor": CARBON["layer"],
-        "color":     CARBON["edge"],
+        "fillcolor": "#f4f4f4",
+        "color":     CARBON["border"],
         "fontcolor": "#161616",
         "fontname":  None,
         "fontsize":  None
     }
 
 def type_style(classes_list):
-    """
-    Merge typography tokens from TYPE_TOKENS (last one wins).
-    """
     out = {}
     if not classes_list:
         return out
@@ -196,14 +170,11 @@ def type_style(classes_list):
 
 def build_graph(model):
     rankdir = "LR" if model["direction"] == "LR" else "TB"
-
-    # Background can be overridden in front-matter: config.background
-    bg = model["config"].get("background", "#F4F4F4")
+    bg = model["config"].get("background", "#FFFFFF")
 
     g = Digraph("G", format="svg")
     g.attr(rankdir=rankdir, nodesep="0.4", ranksep="0.8", bgcolor=bg)
 
-    # Global node defaults (can be overridden per node)
     g.attr(
         "node",
         shape="box",
@@ -211,41 +182,35 @@ def build_graph(model):
         width="2.6",
         height="0.9",
         color=CARBON["border"],
-        fillcolor=CARBON["layer"],
+        fillcolor="#f4f4f4",
         fontcolor="#161616",
         penwidth="1",
-        fontname="IBM Plex Sans",   # requires local install
+        fontname="IBM Plex Sans",
         fontsize="14"
     )
     g.attr("edge", color=CARBON["edge"], penwidth="2", arrowsize="0.7")
 
-    # Nodes
     for nid, nd in model["nodes"].items():
         classes_list = nd.get("classes", [])
-
         csty = color_style(classes_list, model["classes"])
         tsty = type_style(classes_list)
 
         attrs = {
-            "label": nd.get("label", nid),
+            "label": nd.get("label") if nd.get("label") else nid,
             "color": csty["color"],
             "fillcolor": csty["fillcolor"],
             "fontcolor": csty["fontcolor"],
         }
 
-        # From classDef (fontname/fontsize) if provided
         if csty.get("fontname"):
             attrs["fontname"] = csty["fontname"]
         if csty.get("fontsize"):
             attrs["fontsize"] = str(csty["fontsize"])
-
-        # Then allow t-* tokens to override (optional)
         if tsty.get("fontname"):
             attrs["fontname"] = tsty["fontname"]
         if tsty.get("fontsize"):
             attrs["fontsize"] = tsty["fontsize"]
 
-        # Shape
         if nd.get("shape") == "diamond":
             attrs["shape"] = "diamond"
             attrs["style"] = "filled"
@@ -254,7 +219,6 @@ def build_graph(model):
 
         g.node(nid, **attrs)
 
-    # Edges — paint with target's stroke color for coherence
     for (s, t) in model["edges"]:
         tgt_classes = model["nodes"].get(t, {}).get("classes", [])
         stroke = color_style(tgt_classes, model["classes"])["color"]

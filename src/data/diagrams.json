@@ -96,9 +96,9 @@
     "desc": "Venn of archival analysis, practice-based intervention, and computational modelling",
     "thumb": "integrated-research-mapping-spine.svg",
     "tags": [
-      "'systems'",
-      "'blueprint'",
-      "'roadmap'"
+      "systems",
+      "blueprint",
+      "roadmap"
     ],
     "date": "2025-09-08"
   },
@@ -130,14 +130,184 @@
   },
   {
     "slug": "taxonomy",
-    "title": "Taxonomy",
-    "desc": "Faceted overview of the DDR repository by member, year, project, event, unit, theme, funder, paradigm, location, and impact/type.",
+    "title": "DDR Taxonomy",
+    "desc": "Faceted taxonomy of the RCA Department of Design Research archive, structured by core intended, residual/critical and extended categories",
     "file": "assets/taxonomy.svg",
     "thumb": "assets/taxonomy.svg",
     "tags": [
+      "taxonomy",
+      "archive",
+      "core",
+      "residual",
+      "extended",
       "miro",
-      "import"
+      "svg"
     ],
-    "date": "2025-09-19"
+    "date": "2025-09-26"
+  },
+  {
+    "slug": "admin-usecase",
+    "title": "Admin Usecase",
+    "desc": "Shows the administrator workflow: logging in, ingesting metadata, uploading media, managing terms, and reviewing audit logs.",
+    "thumb": "admin-usecase.svg",
+    "tags": [
+      "diagram",
+      "backend",
+      "admin"
+    ],
+    "date": "2025-09-26"
+  },
+  {
+    "slug": "apiflow",
+    "title": "Apiflow",
+    "desc": "Depicts backend communication flow: React UI → FastAPI backend → DigitalOcean Spaces/Postgres → provenance logging.",
+    "thumb": "apiflow.svg",
+    "tags": [
+      "diagram",
+      "backend",
+      "api"
+    ],
+    "date": "2025-09-26"
+  },
+  {
+    "slug": "backend-components",
+    "title": "Backend Components",
+    "desc": "Breakdown of backend services: authentication, request handling, ingestion, taxonomy, audit logging, storage, and database.",
+    "thumb": "backend-components.svg",
+    "tags": [
+      "diagram",
+      "backend"
+    ],
+    "date": "2025-09-26"
+  },
+  {
+    "slug": "container-diagram",
+    "title": "Container Diagram",
+    "desc": "Container-level view of frontend, backend, storage, and database with secure authentication and communication links.",
+    "thumb": "container-diagram.svg",
+    "tags": [
+      "diagram",
+      "backend"
+    ],
+    "date": "2025-09-26"
+  },
+  {
+    "slug": "erd-datamodel",
+    "title": "ERD Datamodel",
+    "desc": "Entity–relationship diagram showing how artefact metadata, media, users, and audit logs are structured in PostgreSQL.",
+    "thumb": "erd-datamodel.svg",
+    "tags": [
+      "diagram",
+      "backend",
+      "database"
+    ],
+    "date": "2025-09-26"
+  },
+  {
+    "slug": "ingestion-sequence-diagram",
+    "title": "Ingestion Sequence Diagram",
+    "desc": "Sequence diagram of metadata ingestion: form validation, secure media upload, and confirmation from backend services.",
+    "thumb": "ingestion-sequence-diagram.svg",
+    "tags": [
+      "diagram",
+      "backend",
+      "ingestion"
+    ],
+    "date": "2025-09-26"
+  },
+  {
+    "slug": "react",
+    "title": "React",
+    "desc": "React logo placeholder — for UI experiments and integration with Carbon Design System.",
+    "thumb": "react.svg",
+    "tags": [
+      "diagram",
+      "frontend"
+    ],
+    "date": "2025-09-26"
+  },
+  {
+    "slug": "search-query-sequence-flow",
+    "title": "Search Query Sequence Flow",
+    "desc": "End-to-end flow of a search query: researcher → frontend UI → FastAPI backend → PostgreSQL vector search → results.",
+    "thumb": "search-query-sequence-flow.svg",
+    "tags": [
+      "diagram",
+      "backend",
+      "search"
+    ],
+    "date": "2025-09-26"
+  },
+  {
+    "slug": "searchui-compoents",
+    "title": "Search UI Components",
+    "desc": "Frontend components for search: query input, filters, semantic results list, and related artefacts display.",
+    "thumb": "searchui-compoents.svg",
+    "tags": [
+      "diagram",
+      "frontend",
+      "search"
+    ],
+    "date": "2025-09-26"
+  },
+  {
+    "slug": "security-auth-fllow",
+    "title": "Security Auth Flow",
+    "desc": "Authentication and authorization sequence: admin login via identity provider, token validation, and API access.",
+    "thumb": "security-auth-fllow.svg",
+    "tags": [
+      "diagram",
+      "backend",
+      "security"
+    ],
+    "date": "2025-09-26"
+  },
+  {
+    "slug": "semantic-search-architecture",
+    "title": "Semantic Search Architecture",
+    "desc": "System architecture for semantic search: embeddings, pgvector storage, FastAPI GraphQL endpoint, and result ranking.",
+    "thumb": "semantic-search-architecture.svg",
+    "tags": [
+      "diagram",
+      "backend",
+      "search"
+    ],
+    "date": "2025-09-26"
+  },
+  {
+    "slug": "system-context-diagram",
+    "title": "System Context Diagram",
+    "desc": "High-level system context: administrators, researchers, backend services, storage, and databases with secure flows.",
+    "thumb": "system-context-diagram.svg",
+    "tags": [
+      "diagram",
+      "context",
+      "backend"
+    ],
+    "date": "2025-09-26"
+  },
+  {
+    "slug": "ideddr_timeline",
+    "title": "IDE x DDR timeline",
+    "desc": "Timeline of the transition from ID(E)RU to DDR, 1962–1986.",
+    "file": "assets/ideddr_timeline.svg",
+    "thumb": "assets/ideddr_timeline.svg",
+    "tags": [
+      "timeline",
+      "xls"
+    ],
+    "date": "2025-09-26"
+  },
+  {
+    "slug": "ddr_activities",
+    "title": "DDR activities",
+    "desc": "Faceted overview of DDR activities across members, projects, and periods.",
+    "file": "assets/ddr_activities.svg",
+    "thumb": "assets/ddr_activities.svg",
+    "tags": [
+      "Activities",
+      "xls"
+    ],
+    "date": "2025-09-26"
   }
-]
+  ]
