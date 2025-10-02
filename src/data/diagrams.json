@@ -309,5 +309,17 @@
       "xls"
     ],
     "date": "2025-09-26"
+  },
+  {
+    "slug": "risk-managment",
+    "title": "Risk management log",
+    "desc": "Identifies, scores, and monitors key academic, practice, ethics, and well-being risks with clear mitigation strategies, actions, and stakeholders to support your PhD project",
+    "file": "assets/heat_map.svg",
+    "thumb": "assets/heat_map.svg",
+    "tags": [
+      "risk",
+      "project management"
+    ],
+    "date": "2025-10-02"
   }
-  ]
+]
