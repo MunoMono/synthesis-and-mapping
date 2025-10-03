@@ -1,3 +1,8 @@
-rm -rf node_modules/.vite node_modules package-lock.json
-npm install
-npm run dev
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  base: '/synthesis-and-mapping/', // 👈 important for GitHub Pages
+})

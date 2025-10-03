@@ -313,7 +313,7 @@
   {
     "slug": "risk-managment",
     "title": "Risk management log",
-    "desc": "Identifies, scores, and monitors key academic, practice, ethics, and well-being risks with clear mitigation strategies, actions, and stakeholders to support your PhD project",
+    "desc": "Identifies, scores, and monitors key academic, practice, ethics, and well-being risks with clear mitigation strategies, actions, and stakeholders to support the PhD project",
     "file": "assets/heat_map.svg",
     "thumb": "assets/heat_map.svg",
     "tags": [
@@ -321,5 +321,30 @@
       "project management"
     ],
     "date": "2025-10-02"
+  },
+  {
+    "slug": "ddr_ativities",
+    "title": "Ddr_Ativities",
+    "desc": "Imported from Miro (PDF → SVG)",
+    "file": "assets/ddr_ativities.svg",
+    "thumb": "assets/ddr_ativities.svg",
+    "tags": [
+      "miro",
+      "import"
+    ],
+    "date": "2025-10-03"
+  },
+  {
+    "slug": "mres-radialmap",
+    "title": "MRes radial map",
+    "desc": "Synthesis of all the MRes keywords using dj3s radial mapping",
+    "file": "assets/moiposter.svg",
+    "thumb": "assets/moiposter.svg",
+    "tags": [
+      "infographic",
+      "graphic design",
+      "metadata"
+    ],
+    "date": "2025-10-03"
   }
 ]
