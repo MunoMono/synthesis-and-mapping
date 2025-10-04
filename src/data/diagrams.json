@@ -311,9 +311,9 @@
     "date": "2025-09-26"
   },
   {
-    "slug": "risk-managment",
-    "title": "Risk management log",
-    "desc": "Identifies, scores, and monitors key academic, practice, ethics, and well-being risks with clear mitigation strategies, actions, and stakeholders to support the PhD project",
+    "slug": "risk-managment-heat-map",
+    "title": "Risk heat map",
+    "desc": "The risk heat map visualizes likelihood vs. impact where likelihood is the probability of an event occurring and impact is the magnitude of the consequence.",
     "file": "assets/heat_map.svg",
     "thumb": "assets/heat_map.svg",
     "tags": [

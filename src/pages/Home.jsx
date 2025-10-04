@@ -1,6 +1,6 @@
-// src/pages/Home.jsx
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Grid, Column, Heading } from "@carbon/react";
+import { Grid, Column, Heading, Search } from "@carbon/react";
 import Crumb from "../components/Crumb.jsx";
 import { formatDate } from "../utils/formatDate.js";
 import diagrams from "../data/diagrams.json";
@@ -16,21 +16,46 @@ function ensureAssetsPrefix(path) {
   return path?.startsWith("assets/") ? path : `assets/${path}`;
 }
 function resolveThumbUrl(entry) {
-  // Prefer explicit file, then thumb; support src/assets and /public/assets
   const candidate = entry.file || entry.thumb;
   if (candidate) {
     const rel = `../${ensureAssetsPrefix(candidate)}`;
-    if (assetUrls[rel]) return assetUrls[rel];       // bundled from src/assets
-    return `/${ensureAssetsPrefix(candidate)}`;       // served from /public/assets
+    if (assetUrls[rel]) return assetUrls[rel];
+    return `/${ensureAssetsPrefix(candidate)}`;
   }
-  // final fallback: try slug.svg (src then public)
   const slugSrc = `../assets/${entry.slug}.svg`;
   if (assetUrls[slugSrc]) return assetUrls[slugSrc];
   return `/assets/${entry.slug}.svg`;
 }
 
+// --- highlight utility -----------------------------------------------------
+function highlight(text, query) {
+  if (!query) return text;
+  const regex = new RegExp(`(${query})`, "gi");
+  return text.split(regex).map((part, i) =>
+    regex.test(part) ? (
+      <mark key={i} style={{ backgroundColor: "#fff176", padding: "0 2px", borderRadius: "2px" }}>
+        {part}
+      </mark>
+    ) : (
+      part
+    )
+  );
+}
+
+// --- main component --------------------------------------------------------
 export default function Home() {
-  const items = diagrams.slice().sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+  const [query, setQuery] = useState("");
+  const items = diagrams
+    .slice()
+    .sort((a, b) => (b.date || "").localeCompare(a.date || ""))
+    .filter((d) =>
+      query
+        ? [d.title, d.desc]
+            .join(" ")
+            .toLowerCase()
+            .includes(query.toLowerCase())
+        : true
+    );
 
   return (
     <div style={{ padding: "1rem" }}>
@@ -38,9 +63,23 @@ export default function Home() {
 
       <Grid fullWidth narrow style={{ marginTop: "1rem" }}>
         <Column lg={16} md={8} sm={4}>
-          <Heading as="h1" className="t-heading-03">Diagrams</Heading>
+          <Heading as="h1" className="t-heading-03">
+            Diagrams
+          </Heading>
         </Column>
 
+        {/* ✅ Search bar */}
+        <Column lg={16} md={8} sm={4} style={{ marginTop: "1rem" }}>
+          <Search
+            labelText="Search diagrams"
+            placeholder="Search by title or description..."
+            size="lg"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+        </Column>
+
+        {/* ✅ Diagram cards */}
         <Column lg={16} md={8} sm={4}>
           <div
             style={{
@@ -77,7 +116,6 @@ export default function Home() {
                       background: "var(--cds-layer-accent)",
                     }}
                   >
-                    {/* Works for JPG/PNG/SVG; SVGs will render as images */}
                     <img
                       src={url}
                       alt={d.title}
@@ -86,9 +124,9 @@ export default function Home() {
                     />
                   </div>
                   <div style={{ padding: "0.75rem" }}>
-                    <div style={{ fontWeight: 600 }}>{d.title}</div>
+                    <div style={{ fontWeight: 600 }}>{highlight(d.title, query)}</div>
                     <div style={{ fontSize: "0.85rem", opacity: 0.7, marginTop: "0.25rem" }}>
-                      {d.desc}
+                      {highlight(d.desc || "", query)}
                     </div>
                     <div style={{ fontSize: "0.8rem", opacity: 0.6, marginTop: "0.25rem" }}>
                       {d.date ? formatDate(d.date) : ""}
@@ -97,6 +135,13 @@ export default function Home() {
                 </Link>
               );
             })}
+
+            {/* Show message if nothing matches */}
+            {items.length === 0 && (
+              <div style={{ gridColumn: "1 / -1", opacity: 0.6, textAlign: "center", padding: "2rem" }}>
+                No diagrams found.
+              </div>
+            )}
           </div>
         </Column>
       </Grid>
