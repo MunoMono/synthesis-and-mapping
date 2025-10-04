@@ -323,18 +323,6 @@
     "date": "2025-10-02"
   },
   {
-    "slug": "ddr_ativities",
-    "title": "Ddr_Ativities",
-    "desc": "Imported from Miro (PDF → SVG)",
-    "file": "assets/ddr_ativities.svg",
-    "thumb": "assets/ddr_ativities.svg",
-    "tags": [
-      "miro",
-      "import"
-    ],
-    "date": "2025-10-03"
-  },
-  {
     "slug": "mres-radialmap",
     "title": "MRes radial map",
     "desc": "Synthesis of all the MRes keywords using dj3s radial mapping",
