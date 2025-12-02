@@ -116,71 +116,6 @@
     "date": "2025-09-08"
   },
   {
-    "slug": "api-network-map",
-    "title": "API flow",
-    "desc": "Flow of Cooper Hewitt GraphQL API requests through Vite, Cloudflare, and S3/Postgres.",
-    "file": "assets/apiflow.svg",
-    "thumb": "assets/apiflow.svg",
-    "tags": [
-      "api",
-      "cooper-hewitt",
-      "infrastructure"
-    ],
-    "date": "2025-09-18"
-  },
-  {
-    "slug": "taxonomy",
-    "title": "DDR Taxonomy",
-    "desc": "Faceted taxonomy of the RCA Department of Design Research archive, structured by core intended, residual/critical and extended categories",
-    "file": "assets/taxonomy.svg",
-    "thumb": "assets/taxonomy.svg",
-    "tags": [
-      "taxonomy",
-      "archive",
-      "core",
-      "residual",
-      "extended",
-      "miro",
-      "svg"
-    ],
-    "date": "2025-09-26"
-  },
-  {
-    "slug": "admin-usecase",
-    "title": "Admin Usecase",
-    "desc": "Shows the administrator workflow: logging in, ingesting metadata, uploading media, managing terms, and reviewing audit logs.",
-    "thumb": "admin-usecase.svg",
-    "tags": [
-      "diagram",
-      "backend",
-      "admin"
-    ],
-    "date": "2025-09-26"
-  },
-  {
-    "slug": "apiflow",
-    "title": "Apiflow",
-    "desc": "Depicts backend communication flow: React UI → FastAPI backend → DigitalOcean Spaces/Postgres → provenance logging.",
-    "thumb": "apiflow.svg",
-    "tags": [
-      "diagram",
-      "backend",
-      "api"
-    ],
-    "date": "2025-09-26"
-  },
-  {
-    "slug": "backend-components",
-    "title": "Backend Components",
-    "desc": "Breakdown of backend services: authentication, request handling, ingestion, taxonomy, audit logging, storage, and database.",
-    "thumb": "backend-components.svg",
-    "tags": [
-      "diagram",
-      "backend"
-    ],
-    "date": "2025-09-26"
-  },
-  {
     "slug": "container-diagram",
     "title": "Container Diagram",
     "desc": "Container-level view of frontend, backend, storage, and database with secure authentication and communication links.",
@@ -188,18 +123,6 @@
     "tags": [
       "diagram",
       "backend"
-    ],
-    "date": "2025-09-26"
-  },
-  {
-    "slug": "erd-datamodel",
-    "title": "ERD Datamodel",
-    "desc": "Entity–relationship diagram showing how artefact metadata, media, users, and audit logs are structured in PostgreSQL.",
-    "thumb": "erd-datamodel.svg",
-    "tags": [
-      "diagram",
-      "backend",
-      "database"
     ],
     "date": "2025-09-26"
   },
@@ -212,77 +135,6 @@
       "diagram",
       "backend",
       "ingestion"
-    ],
-    "date": "2025-09-26"
-  },
-  {
-    "slug": "react",
-    "title": "React",
-    "desc": "React logo placeholder — for UI experiments and integration with Carbon Design System.",
-    "thumb": "react.svg",
-    "tags": [
-      "diagram",
-      "frontend"
-    ],
-    "date": "2025-09-26"
-  },
-  {
-    "slug": "search-query-sequence-flow",
-    "title": "Search Query Sequence Flow",
-    "desc": "End-to-end flow of a search query: researcher → frontend UI → FastAPI backend → PostgreSQL vector search → results.",
-    "thumb": "search-query-sequence-flow.svg",
-    "tags": [
-      "diagram",
-      "backend",
-      "search"
-    ],
-    "date": "2025-09-26"
-  },
-  {
-    "slug": "searchui-compoents",
-    "title": "Search UI Components",
-    "desc": "Frontend components for search: query input, filters, semantic results list, and related artefacts display.",
-    "thumb": "searchui-compoents.svg",
-    "tags": [
-      "diagram",
-      "frontend",
-      "search"
-    ],
-    "date": "2025-09-26"
-  },
-  {
-    "slug": "security-auth-fllow",
-    "title": "Security Auth Flow",
-    "desc": "Authentication and authorization sequence: admin login via identity provider, token validation, and API access.",
-    "thumb": "security-auth-fllow.svg",
-    "tags": [
-      "diagram",
-      "backend",
-      "security"
-    ],
-    "date": "2025-09-26"
-  },
-  {
-    "slug": "semantic-search-architecture",
-    "title": "Semantic Search Architecture",
-    "desc": "System architecture for semantic search: embeddings, pgvector storage, FastAPI GraphQL endpoint, and result ranking.",
-    "thumb": "semantic-search-architecture.svg",
-    "tags": [
-      "diagram",
-      "backend",
-      "search"
-    ],
-    "date": "2025-09-26"
-  },
-  {
-    "slug": "system-context-diagram",
-    "title": "System Context Diagram",
-    "desc": "High-level system context: administrators, researchers, backend services, storage, and databases with secure flows.",
-    "thumb": "system-context-diagram.svg",
-    "tags": [
-      "diagram",
-      "context",
-      "backend"
     ],
     "date": "2025-09-26"
   },
@@ -334,5 +186,28 @@
       "metadata"
     ],
     "date": "2025-10-03"
+  },
+  {
+    "slug": "sql-schema",
+    "title": "PostgreSQL schema",
+    "desc": "pgModeler schema of ddr_archive: top-left ingestion tables (alembic_version, items); middle band staff layer (agent_employment, core_agent, iso_639_language_codes); bottom ref_* authority grid (incl. ddr_category); top-right green block of yellow analytics views—our human-readable database map of live system.",
+    "file": "assets/schema.svg",
+    "thumb": "assets/schema.svg",
+    "tags": [
+      "systems",
+      "SQL"
+    ],
+    "date": "2025-11-21"
+  },
+  {
+    "slug": "lit-map",
+    "title": "Literature map",
+    "desc": "A three-strand literature map showing how design methods, DDR historiography, and practice-led cybernetic design intersect, highlighting shared concerns around infrastructures, epistemic drift, and computational archives to frame the thesis’s conceptual terrain.",
+    "file": "assets/literature-map.svg",
+    "thumb": "assets/literature-map.svg",
+    "tags": [
+      "systems"
+    ],
+    "date": "2025-12-02"
   }
 ]
