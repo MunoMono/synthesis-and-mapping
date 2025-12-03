@@ -200,11 +200,11 @@
     "date": "2025-11-21"
   },
   {
-    "slug": "lit-map",
-    "title": "Literature map",
-    "desc": "A three-strand literature map showing how design methods, DDR historiography, and practice-led cybernetic design intersect, highlighting shared concerns around infrastructures, epistemic drift, and computational archives to frame the thesis’s conceptual terrain.",
-    "file": "assets/literature-map.svg",
-    "thumb": "assets/literature-map.svg",
+    "slug": "phd-model",
+    "title": "PhD framework",
+    "desc": "A three-strand model demonstrating how archival epistemology can be designed, formalised, and enacted through a cybernetic computational system that models, constrains, and reveals knowledge structures in real time.",
+    "file": "assets/phd-framework.svg",
+    "thumb": "phd-framework.svg",
     "tags": [
       "systems"
     ],
