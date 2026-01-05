@@ -209,5 +209,16 @@
       "systems"
     ],
     "date": "2025-12-02"
+  },
+  {
+    "slug": "core-constellation",
+    "title": "Core literature constellation",
+    "desc": "Archer, Cross and Rittel/Webber define the core tension (system, designerly knowing, wickedness), while Frayling/Schön/Jonas, Bowker & Star, and Bender et al. show how that tension is legitimised, infrastructurally encoded, and computationally reconstructed.",
+        "file": "assets/core-literature-constellation.svg",
+    "thumb": "assets/core-literature-constellation.svg",
+    "tags": [
+      "'core' 'literature'"
+    ],
+    "date": "2026-01-05"
   }
 ]
