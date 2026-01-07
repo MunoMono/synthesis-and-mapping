@@ -202,7 +202,7 @@
   {
     "slug": "phd-model",
     "title": "PhD framework",
-    "desc": "A three-strand model demonstrating how archival epistemology can be designed, formalised, and enacted through a cybernetic computational system that models, constrains, and reveals knowledge structures in real time.",
+    "desc": "A three-strand model showing how epistemic drift can be reconstructed and made legible by integrating design methods, institutional archives, and multimodal machine learning with visual analytics.",
     "file": "assets/phd-framework.svg",
     "thumb": "phd-framework.svg",
     "tags": [
@@ -213,7 +213,7 @@
   {
     "slug": "core-constellation",
     "title": "Core literature constellation",
-    "desc": "Archer, Cross and Rittel/Webber define the core tension (system, designerly knowing, wickedness), while Frayling/Schön/Jonas, Bowker & Star, and Bender et al. show how that tension is legitimised, infrastructurally encoded, and computationally reconstructed.",
+    "desc": "Archer, Cross, and Rittel/Webber set the core tension. Frayling/Schön/Jonas legitimise it in practice, Bowker & Star trace its infrastructural encoding, and Devlin/Bender/Drucker provide the computational and visual terms for reconstructing it.",
         "file": "assets/core-literature-constellation.svg",
     "thumb": "assets/core-literature-constellation.svg",
     "tags": [
