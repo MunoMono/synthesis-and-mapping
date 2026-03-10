@@ -220,5 +220,31 @@
       "'core' 'literature'"
     ],
     "date": "2026-01-05"
+  },
+  {
+    "slug": "how_ml_works",
+    "title": "How ML Works",
+    "desc": "A concise visual overview of the machine learning workflow from data preparation to model output.",
+    "file": "assets/how_ml_works.svg",
+    "thumb": "assets/how_ml_works.svg",
+    "tags": [
+      "machine learning",
+      "workflow"
+    ],
+    "date": "2026-03-10"
+  },
+  {
+    "slug": "wd+ru",
+    "title": "WD+RU: Women in Design Research",
+    "desc": "In honour of International Women's Day 2026, WD+RU in collaboration with Graham Newman, a PhD researcher at the Royal College of Art, celebrates the work of women in the Department of Design Research (RCA, 1965-85). At a time when women were marginalised in the design field as a whole, the DDR was remarkable for its female representation. Some of those women part-inspired WD+RU, whose mission has always been to raise awareness about women working in the field of visual communication and design education. Their marginalisation remains an issue in 2026.",
+    "file": "assets/wd+ru.svg",
+    "thumb": "assets/wd+ru.svg",
+    "tags": [
+      "women",
+      "design",
+      "history",
+      "rca"
+    ],
+    "date": "2026-03-08"
   }
 ]
