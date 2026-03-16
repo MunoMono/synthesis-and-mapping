@@ -161,6 +161,8 @@ export default function Diagram() {
                   <img
                     src={fileUrl}
                     alt={entry.title}
+                    loading="lazy"
+                    decoding="async"
                     style={{ display: "block", maxWidth: "none", width: "100%" }}
                   />
                 </TransformComponent>

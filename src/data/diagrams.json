@@ -1,5 +1,30 @@
 [
   {
+    "slug": "mres-radialmap",
+    "title": "MRes radial map",
+    "desc": "Synthesis of all the MRes keywords using dj3s radial mapping",
+    "file": "assets/moiposter.svg",
+    "thumb": "assets/moiposter.svg",
+    "tags": [
+      "infographic",
+      "graphic design",
+      "metadata"
+    ],
+    "date": "2026-03-11"
+  },
+  {
+    "slug": "risk-managment-heat-map",
+    "title": "Risk heat map",
+    "desc": "The risk heat map visualizes likelihood vs. impact where likelihood is the probability of an event occurring and impact is the magnitude of the consequence.",
+    "file": "assets/heat_map.svg",
+    "thumb": "assets/heat_map.svg",
+    "tags": [
+      "risk",
+      "project management"
+    ],
+    "date": "2026-03-12"
+  },
+  {
     "slug": "interpretivist-research-process",
     "title": "Interpretivist research process",
     "desc": "PhD research flow diagram (interpretivist paradigm)",
@@ -9,7 +34,43 @@
       "methodology",
       "interpretivism"
     ],
-    "date": "2025-09-05"
+    "date": "2026-03-13"
+  },
+  {
+    "slug": "ideddr_timeline",
+    "title": "Stephen Boyd Davis ID(E)RU x DDR timeline",
+    "desc": "Timeline of the transition from ID(E)RU to DDR, 1962–1986.",
+    "file": "assets/ideddr_timeline.svg",
+    "thumb": "assets/ideddr_timeline.svg",
+    "tags": [
+      "timeline",
+      "xls"
+    ],
+    "date": "2026-03-14"
+  },
+  {
+    "slug": "taxonomy",
+    "title": "DDR archive taxonomy",
+    "desc": "Critical taxonomy with core intended and critical authorities.",
+    "file": "assets/taxonomy.svg",
+    "thumb": "assets/taxonomy.svg",
+    "tags": [
+      "miro",
+      "import"
+    ],
+    "date": "2026-03-15"
+  },
+  {
+    "slug": "ingestion-sequence-diagram",
+    "title": "Ingestion Sequence Diagram",
+    "desc": "Sequence diagram of metadata ingestion: form validation, secure media upload, and confirmation from backend services.",
+    "thumb": "ingestion-sequence-diagram.svg",
+    "tags": [
+      "diagram",
+      "backend",
+      "ingestion"
+    ],
+    "date": "2026-03-16"
   },
   {
     "slug": "context-engineering",
@@ -21,7 +82,7 @@
       "rag",
       "systems"
     ],
-    "date": "2025-09-05",
+    "date": "2026-03-17",
     "spec": {
       "direction": "DOWN",
       "nodes": [
@@ -91,103 +152,6 @@
     }
   },
   {
-    "slug": "integrated-research-mapping-spine",
-    "title": "Integrated research mapping",
-    "desc": "Venn of archival analysis, practice-based intervention, and computational modelling",
-    "thumb": "integrated-research-mapping-spine.svg",
-    "tags": [
-      "systems",
-      "blueprint",
-      "roadmap"
-    ],
-    "date": "2025-09-08"
-  },
-  {
-    "slug": "brainstorm01",
-    "title": "Research brainstorm",
-    "desc": "Context → Research question, Interpretivism and critical theory → Research question, and Taxonomic classification",
-    "file": "assets/brainstorm01.jpg",
-    "thumb": "assets/brainstorm01.jpg",
-    "tags": [
-      "Context",
-      "Theory",
-      "Taxonomy"
-    ],
-    "date": "2025-09-08"
-  },
-  {
-    "slug": "container-diagram",
-    "title": "Container Diagram",
-    "desc": "Container-level view of frontend, backend, storage, and database with secure authentication and communication links.",
-    "thumb": "container-diagram.svg",
-    "tags": [
-      "diagram",
-      "backend"
-    ],
-    "date": "2025-09-26"
-  },
-  {
-    "slug": "ingestion-sequence-diagram",
-    "title": "Ingestion Sequence Diagram",
-    "desc": "Sequence diagram of metadata ingestion: form validation, secure media upload, and confirmation from backend services.",
-    "thumb": "ingestion-sequence-diagram.svg",
-    "tags": [
-      "diagram",
-      "backend",
-      "ingestion"
-    ],
-    "date": "2025-09-26"
-  },
-  {
-    "slug": "ideddr_timeline",
-    "title": "IDE x DDR timeline",
-    "desc": "Timeline of the transition from ID(E)RU to DDR, 1962–1986.",
-    "file": "assets/ideddr_timeline.svg",
-    "thumb": "assets/ideddr_timeline.svg",
-    "tags": [
-      "timeline",
-      "xls"
-    ],
-    "date": "2025-09-26"
-  },
-  {
-    "slug": "ddr_activities",
-    "title": "DDR activities",
-    "desc": "Faceted overview of DDR activities across members, projects, and periods.",
-    "file": "assets/ddr_activities.svg",
-    "thumb": "assets/ddr_activities.svg",
-    "tags": [
-      "Activities",
-      "xls"
-    ],
-    "date": "2025-09-26"
-  },
-  {
-    "slug": "risk-managment-heat-map",
-    "title": "Risk heat map",
-    "desc": "The risk heat map visualizes likelihood vs. impact where likelihood is the probability of an event occurring and impact is the magnitude of the consequence.",
-    "file": "assets/heat_map.svg",
-    "thumb": "assets/heat_map.svg",
-    "tags": [
-      "risk",
-      "project management"
-    ],
-    "date": "2025-10-02"
-  },
-  {
-    "slug": "mres-radialmap",
-    "title": "MRes radial map",
-    "desc": "Synthesis of all the MRes keywords using dj3s radial mapping",
-    "file": "assets/moiposter.svg",
-    "thumb": "assets/moiposter.svg",
-    "tags": [
-      "infographic",
-      "graphic design",
-      "metadata"
-    ],
-    "date": "2025-10-03"
-  },
-  {
     "slug": "sql-schema",
     "title": "PostgreSQL schema",
     "desc": "pgModeler schema of ddr_archive: top-left ingestion tables (alembic_version, items); middle band staff layer (agent_employment, core_agent, iso_639_language_codes); bottom ref_* authority grid (incl. ddr_category); top-right green block of yellow analytics views—our human-readable database map of live system.",
@@ -197,46 +161,12 @@
       "systems",
       "SQL"
     ],
-    "date": "2025-11-21"
-  },
-  {
-    "slug": "phd-model",
-    "title": "PhD framework",
-    "desc": "A three-strand model showing how epistemic drift can be reconstructed and made legible by integrating design methods, institutional archives, and multimodal machine learning with visual analytics.",
-    "file": "assets/phd-framework.svg",
-    "thumb": "phd-framework.svg",
-    "tags": [
-      "systems"
-    ],
-    "date": "2025-12-02"
-  },
-  {
-    "slug": "core-constellation",
-    "title": "Core literature constellation",
-    "desc": "Archer, Cross, and Rittel/Webber set the core tension. Frayling/Schön/Jonas legitimise it in practice, Bowker & Star trace its infrastructural encoding, and Devlin/Bender/Drucker provide the computational and visual terms for reconstructing it.",
-        "file": "assets/core-literature-constellation.svg",
-    "thumb": "assets/core-literature-constellation.svg",
-    "tags": [
-      "'core' 'literature'"
-    ],
-    "date": "2026-01-05"
-  },
-  {
-    "slug": "how_ml_works",
-    "title": "How ML Works",
-    "desc": "A concise visual overview of the machine learning workflow from data preparation to model output.",
-    "file": "assets/how_ml_works.svg",
-    "thumb": "assets/how_ml_works.svg",
-    "tags": [
-      "machine learning",
-      "workflow"
-    ],
-    "date": "2026-03-10"
+    "date": "2026-03-18"
   },
   {
     "slug": "wd+ru",
     "title": "WD+RU: Women in Design Research",
-    "desc": "In honour of International Women's Day 2026, WD+RU in collaboration with Graham Newman, a PhD researcher at the Royal College of Art, celebrates the work of women in the Department of Design Research (RCA, 1965-85). At a time when women were marginalised in the design field as a whole, the DDR was remarkable for its female representation. Some of those women part-inspired WD+RU, whose mission has always been to raise awareness about women working in the field of visual communication and design education. Their marginalisation remains an issue in 2026.",
+    "desc": "For International Women's Day 2026, WD+RU and Graham Newman spotlight women of the RCA Department of Design Research (1965-85), notable for its female representation. WD+RU continues raising awareness of women in visual communication and design education, where inequities persist.",
     "file": "assets/wd+ru.svg",
     "thumb": "assets/wd+ru.svg",
     "tags": [
@@ -245,6 +175,58 @@
       "history",
       "rca"
     ],
-    "date": "2026-03-08"
+    "date": "2026-03-19"
+  },
+  {
+    "slug": "phd-model",
+    "title": "PhD conceptual framework",
+    "desc": "A three-strand conceptual framework for activating the RCA’s DDR archive through testamentary traces of contested design knowledge, linking historical inquiry, archival systems, and computational methods including multimodal machine learning and visual analytics.",
+    "file": "assets/phd-framework.svg",
+    "thumb": "assets/phd-framework.svg",
+    "tags": [
+      "research-framework",
+      "archive",
+      "design-research",
+      "computational-methods"
+    ],
+    "date": "2026-03-20"
+  },
+  {
+    "slug": "prototypical-argument-structure",
+    "title": "Prototypical argument structure",
+    "desc": "Aristotle and other Greek rhetoricians laid down a basic structure for an argument that still serves as a useful template. Derived from Mike Sharples, Writing as Creative Design (London: Routledge, 1999).",
+    "file": "assets/prototypical_argument_structure.svg",
+    "thumb": "assets/prototypical_argument_structure.svg",
+    "tags": [
+      "rhetoric",
+      "argument",
+      "structure"
+    ],
+    "date": "2026-03-21"
+  },
+  {
+    "slug": "how-the-ml-works",
+    "title": "Testamentary traces ingested into machine learning",
+    "desc": "Archival testamentary traces move through preparation, embedding, and model training to become retrieval-ready ML artifacts for analysis and reuse.",
+    "file": "assets/how_the+ml_works.svg",
+    "thumb": "assets/how_the+ml_works.svg",
+    "tags": [
+      "machine-learning",
+      "pipeline",
+      "archive"
+    ],
+    "date": "2026-03-22"
+  },
+  {
+    "slug": "literature_mapping",
+    "title": "Y1 APR literature review mapping",
+    "desc": "Miro export showing Year 1 APR literature review mapping, converted from PDF to SVG for the gallery.",
+    "file": "assets/literature_mapping.svg",
+    "thumb": "assets/literature_mapping.svg",
+    "tags": [
+      "miro",
+      "import"
+    ],
+    "date": "2026-03-23"
   }
 ]
