@@ -13,7 +13,7 @@ function HeaderBar({ theme, toggleTheme }) {
   return (
     <Header aria-label="Reference Library">
       <HeaderName href="#" prefix="">
-        Graham Newman synthesis and mapping
+        Graham Newman RCA PhD synthesis and mapping
       </HeaderName>
 
       <HeaderGlobalBar>
