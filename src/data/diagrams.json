@@ -228,5 +228,18 @@
       "import"
     ],
     "date": "2026-03-23"
+  },
+  {
+    "slug": "plan-to-completion",
+    "title": "Plan to completion",
+    "desc": "Blueprint and roadmap for the PhD, outlining the path from current research synthesis through writing, validation, and submission milestones.",
+    "file": "assets/plan_to _completion.svg",
+    "thumb": "assets/plan_to _completion.svg",
+    "tags": [
+      "phd",
+      "roadmap",
+      "planning"
+    ],
+    "date": "2026-03-24"
   }
 ]
