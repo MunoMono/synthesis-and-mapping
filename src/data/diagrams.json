@@ -1,18 +1,5 @@
 [
   {
-    "slug": "mres-radialmap",
-    "title": "MRes radial map",
-    "desc": "Synthesis of all the MRes keywords using dj3s radial mapping",
-    "file": "assets/moiposter.svg",
-    "thumb": "assets/moiposter.svg",
-    "tags": [
-      "infographic",
-      "graphic design",
-      "metadata"
-    ],
-    "date": "2026-03-11"
-  },
-  {
     "slug": "risk-managment-heat-map",
     "title": "Risk heat map",
     "desc": "The risk heat map visualizes likelihood vs. impact where likelihood is the probability of an event occurring and impact is the magnitude of the consequence.",
