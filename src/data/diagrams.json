@@ -195,8 +195,8 @@
     "slug": "how-the-ml-works",
     "title": "Testamentary traces ingested into machine learning",
     "desc": "Archival testamentary traces move through preparation, embedding, and model training to become retrieval-ready ML artifacts for analysis and reuse.",
-    "file": "assets/how_the+ml_works.svg",
-    "thumb": "assets/how_the+ml_works.svg",
+    "file": "assets/how_the_ml_works.svg",
+    "thumb": "how_the_ml_works.svg",
     "tags": [
       "machine-learning",
       "pipeline",
