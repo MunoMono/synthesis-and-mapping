@@ -228,5 +228,19 @@
       "planning"
     ],
     "date": "2026-03-24"
+  },
+  {
+    "slug": "data_science_algorithms",
+    "title": "Machine learning algorithms used in data science–cheat sheet",
+    "desc": "Comprehensive reference guide to machine learning algorithms employed in data science. Situates computational methods within the PhD exploration of how algorithmic approaches inform and shape the research methodology and data analysis pipeline.",
+    "file": "assets/data_science_algorithms.svg",
+    "thumb": "assets/data_science_algorithms.svg",
+    "tags": [
+      "computational methods",
+      "machine learning",
+      "data science",
+      "reference"
+    ],
+    "date": "2026-04-09"
   }
 ]

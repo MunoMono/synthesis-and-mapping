@@ -56,13 +56,21 @@ def save_json(path, data):
         json.dump(data, f, indent=2, ensure_ascii=False)
 
 def main():
+    import sys
+    
     if not os.path.isdir(PDF_DIR):
         print(f"⚠️ No such directory: {PDF_DIR}")
         return
 
     os.makedirs(OUT_DIR, exist_ok=True)
 
-    pdfs = [f for f in os.listdir(PDF_DIR) if f.lower().endswith(".pdf")]
+    # If a specific PDF filename is provided as argument, use only that
+    if len(sys.argv) > 1:
+        pdf_filename = sys.argv[1]
+        pdfs = [pdf_filename] if pdf_filename.lower().endswith(".pdf") else [pdf_filename + ".pdf"]
+    else:
+        pdfs = [f for f in os.listdir(PDF_DIR) if f.lower().endswith(".pdf")]
+    
     if not pdfs:
         print("⚠️ No PDF files found in src/assets/miro-pdfs/")
         return
