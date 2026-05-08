@@ -242,5 +242,20 @@
       "reference"
     ],
     "date": "2026-04-09"
+  },
+  {
+    "slug": "methodological-rationale-for-archival-reactivation",
+    "title": "Methodological rationale for archival reactivation",
+    "desc": "A visual framework showing how oral history, archival LLM interrogation and embedding-based visual analytics work together to produce new legibilities of contested design knowledge, with descriptive pattern checks used as a corroborative support layer.",
+    "file": "assets/methodological-rationale-for-archival-reactivation.svg",
+    "thumb": "assets/methodological-rationale-for-archival-reactivation.svg",
+    "tags": [
+      "methodology",
+      "oral history",
+      "llm",
+      "visual analytics",
+      "archive"
+    ],
+    "date": "2026-05-08"
   }
 ]
