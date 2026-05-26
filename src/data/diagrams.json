@@ -257,5 +257,20 @@
       "archive"
     ],
     "date": "2026-05-08"
+  },
+  {
+    "slug": "ddr-archive-relations",
+    "title": "DDR archive relations: people, problem areas and funders",
+    "desc": "Alluvial mapping shows recurring relationships between project leads, applied research clusters and funder types across DDR archive projects.",
+    "file": "assets/alluvial_people+projects.svg",
+    "thumb": "assets/alluvial_people+projects.svg",
+    "tags": [
+      "alluvial",
+      "archive",
+      "people",
+      "projects",
+      "funding"
+    ],
+    "date": "2026-05-26"
   }
 ]
