@@ -272,5 +272,20 @@
       "funding"
     ],
     "date": "2026-05-26"
+  },
+  {
+    "slug": "research-instrument-inquiry",
+    "title": "Research instrument inquiry",
+    "desc": "Five AI-enabled methodological buckets for making testamentary traces, missingness and contested design knowledge legible.",
+    "file": "assets/research_instrument_inquiry.svg",
+    "thumb": "assets/research_instrument_inquiry.svg",
+    "tags": [
+      "ai",
+      "methodology",
+      "archive",
+      "design-knowledge",
+      "research"
+    ],
+    "date": "2026-06-11"
   }
 ]
