@@ -6,16 +6,28 @@ import { formatDate } from "../utils/formatDate.js";
 import diagrams from "../data/diagrams.json";
 
 // Resolve thumbnails from src/assets at build time
-const assetUrls = import.meta.glob("../assets/*.{svg,png,jpg,jpeg,webp}", {
+const assetUrls = import.meta.glob("../assets/**/*.{svg,png,jpg,jpeg,webp}", {
   eager: true,
-  as: "url",
+  query: "?url",
+  import: "default",
 });
 
 // --- helpers ---------------------------------------------------------------
 function ensureAssetsPrefix(path) {
   return path?.startsWith("assets/") ? path : `assets/${path}`;
 }
+
 function resolveThumbUrl(entry) {
+  const explicitThumb = entry.thumb && entry.thumb !== entry.file ? entry.thumb : null;
+  if (explicitThumb) {
+    const rel = `../${ensureAssetsPrefix(explicitThumb)}`;
+    if (assetUrls[rel]) return assetUrls[rel];
+    return `/${ensureAssetsPrefix(explicitThumb)}`;
+  }
+
+  const generatedThumb = `../assets/thumbs/${entry.slug}.png`;
+  if (assetUrls[generatedThumb]) return assetUrls[generatedThumb];
+
   const candidate = entry.file || entry.thumb;
   if (candidate) {
     const rel = `../${ensureAssetsPrefix(candidate)}`;

@@ -115,6 +115,31 @@ and can then be registered into the gallery with:
 python3 scripts/newgraphic.py
 ```
 
+### PNG Gallery Thumbnails
+
+Gallery cards can use lightweight PNG previews while the detail view keeps the original artwork.
+
+```bash
+npm run thumbs
+```
+
+This command generates managed thumbnails in:
+
+```bash
+src/assets/thumbs/
+```
+
+Builds run it automatically, and it only regenerates thumbnails when the source artwork changes.
+
+Workflow:
+
+- Add or update your main artwork in `src/assets/`
+- Register it in `src/data/diagrams.json`
+- Let the build create `src/assets/thumbs/<slug>.png` automatically
+- If you want a hand-crafted preview, replace that PNG manually; the generator will stop overwriting it
+
+If a diagram entry has an explicit `thumb`, the gallery uses that first. Otherwise it prefers `src/assets/thumbs/<slug>.png` when present and falls back to the original file.
+
 ---
 
 ## 🛠 Useful Commands

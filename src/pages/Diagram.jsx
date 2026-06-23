@@ -1,19 +1,22 @@
+import { useEffect, useRef, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Grid, Column, Heading, Button } from "@carbon/react";
-import { Download } from "@carbon/icons-react";
+import { Download, Maximize } from "@carbon/icons-react";
 import Crumb from "../components/Crumb.jsx";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import diagrams from "../data/diagrams.json";
 import { marked } from "marked";
 
 // Asset resolution
-const assetUrls = import.meta.glob("../assets/*.{svg,png,jpg,jpeg,webp}", {
+const assetUrls = import.meta.glob("../assets/**/*.{svg,png,jpg,jpeg,webp}", {
   eager: true,
-  as: "url",
+  query: "?url",
+  import: "default",
 });
 const annotationModules = import.meta.glob("../assets/annotations/*.md", {
   eager: true,
-  as: "raw",
+  query: "?raw",
+  import: "default",
 });
 
 function resolveEntry(slug) {
@@ -54,6 +57,8 @@ function getSvgSize(svgText) {
 }
 
 export default function Diagram() {
+  const diagramAreaRef = useRef(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const { slug } = useParams();
   const entry =
     resolveEntry(slug) ||
@@ -69,6 +74,17 @@ export default function Diagram() {
   const fileNameGuess = entry.file || `${entry.slug}.svg`;
   const ext = getExtFromName(fileNameGuess);
   const isSvg = ext === "svg";
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(document.fullscreenElement === diagramAreaRef.current);
+    };
+
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+    };
+  }, []);
 
   const handleDownloadOriginal = async () => {
     const res = await fetch(fileUrl, { cache: "no-cache" });
@@ -135,6 +151,23 @@ export default function Diagram() {
     }
   };
 
+  const handleToggleFullscreen = async () => {
+    const target = diagramAreaRef.current;
+    if (!target) return;
+
+    try {
+      if (document.fullscreenElement === target) {
+        await document.exitFullscreen();
+        return;
+      }
+
+      await target.requestFullscreen();
+    } catch (error) {
+      console.error(error);
+      alert("Sorry, fullscreen mode is not available here.");
+    }
+  };
+
   return (
     <div style={{ padding: "1rem" }}>
       <Crumb trail={[{ label: "Home", to: "/" }, { label: entry.title, isCurrentPage: true }]} />
@@ -147,23 +180,38 @@ export default function Diagram() {
         <Column lg={16} md={8} sm={4}>
           <div style={{ marginTop: "1rem" }}>
             <div
+              ref={diagramAreaRef}
               style={{
                 border: "1px solid var(--cds-border-subtle)",
                 background: "var(--cds-layer)",
-                height: "70vh",
+                height: isFullscreen ? "100vh" : "70vh",
                 width: "100%",
                 overflow: "hidden",
               }}
               aria-label="Interactive diagram area"
             >
-              <TransformWrapper minScale={0.5} initialScale={1}>
-                <TransformComponent wrapperStyle={{ width: "100%", height: "100%" }}>
+              <TransformWrapper
+                minScale={1}
+                initialScale={1}
+                centerOnInit
+                centerZoomedOut
+              >
+                <TransformComponent
+                  wrapperStyle={{ width: "100%", height: "100%" }}
+                  contentStyle={{ width: "100%", height: "100%" }}
+                >
                   <img
                     src={fileUrl}
                     alt={entry.title}
                     loading="lazy"
                     decoding="async"
-                    style={{ display: "block", maxWidth: "none", width: "100%" }}
+                    style={{
+                      display: "block",
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "contain",
+                      objectPosition: "center",
+                    }}
                   />
                 </TransformComponent>
               </TransformWrapper>
@@ -181,13 +229,25 @@ export default function Diagram() {
               />
             )}
 
-            <div style={{ marginTop: "0.75rem", display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+            <div style={{ marginTop: "0.75rem", display: "flex", gap: "0.5rem", flexWrap: "wrap", alignItems: "center" }}>
               <Button kind="tertiary" onClick={handleDownloadPNG} renderIcon={Download}>
                 Download PNG
               </Button>
               <Button kind="tertiary" onClick={handleDownloadOriginal} renderIcon={Download}>
                 {isSvg ? "Download SVG" : "Download Image"}
               </Button>
+              <div style={{ marginLeft: "auto" }}>
+                <Button
+                  kind="ghost"
+                  hasIconOnly
+                  iconDescription={isFullscreen ? "Exit fullscreen" : "Open fullscreen"}
+                  label={isFullscreen ? "Exit fullscreen" : "Open fullscreen"}
+                  onClick={handleToggleFullscreen}
+                  renderIcon={Maximize}
+                  tooltipAlignment="end"
+                  tooltipPosition="left"
+                />
+              </div>
             </div>
 
             <div style={{ marginTop: "0.75rem" }}>
