@@ -1,149 +1,149 @@
 {
   "assets/thumbs/risk-managment-heat-map.png": {
     "sourceRel": "assets/heat_map.svg",
-    "sourceHash": "fd2d5f51908415d85c5b2cc32089eef77b13c2868b256d37d379b68927f04d15",
+    "sourceHash": "a33d41dde3377a63ed01fcdf0926484068942a9c0c945efe88ae44f08949ec8c",
     "outputHash": "d98f1938e73cbc1319ce1e11341cd0ee7692fc7bcbf916763f15e429bbfee130",
     "managed": true,
-    "generatedAt": "2026-09-23T16:10:14.418Z"
+    "generatedAt": "2026-09-23T16:14:51.451Z"
   },
   "assets/thumbs/interpretivist-research-process.png": {
     "sourceRel": "assets/interpretivist-research-process.svg",
-    "sourceHash": "b8b957bc9fcb9889bc7214f4547837662e87e1e44990b6b1b24ceea6baac1b61",
+    "sourceHash": "ae753a5717662645ad97aadaf93e8cc839e63519caf279e51ccd425feff14b55",
     "outputHash": "8cbd019320817e62d367de6fb144d30254ca83398561461687fa9f45668fb061",
     "managed": true,
-    "generatedAt": "2026-09-23T16:10:14.779Z"
+    "generatedAt": "2026-09-23T16:14:51.823Z"
   },
   "assets/thumbs/ideddr_timeline.png": {
     "sourceRel": "assets/ideddr_timeline.svg",
-    "sourceHash": "b779043b1e8b3e9b752aa5f1cee0d4d6743bc42b301253a822b69d7df7ead3b7",
+    "sourceHash": "b7dd5af8073303ab211e06adbeeb621ee0a81621d797f8cc8511ec5207404b50",
     "outputHash": "abca5d90b8f982fb4bd7d339edbcc162362d7a0b0e4b13c4030d8d379e8f2874",
     "managed": true,
-    "generatedAt": "2026-09-23T16:10:15.247Z"
+    "generatedAt": "2026-09-23T16:14:52.294Z"
   },
   "assets/thumbs/taxonomy.png": {
     "sourceRel": "assets/taxonomy.svg",
-    "sourceHash": "76549334b2598563acb9f1c62757af072d6487e1923aa31ae757e14cb492ca17",
+    "sourceHash": "f59ead37d213756c62a75ff5efe8f82a61f9bec84acb5e5f116680fe4c836396",
     "outputHash": "ed9db215060dd6d526ce78cbb4a11baac99a6161c76cc62441cc67cd535601e9",
     "managed": true,
-    "generatedAt": "2026-09-23T16:10:15.624Z"
+    "generatedAt": "2026-09-23T16:14:52.683Z"
   },
   "assets/thumbs/ingestion-sequence-diagram.png": {
     "sourceRel": "assets/ingestion-sequence-diagram.svg",
-    "sourceHash": "f6260545e1fb4873ceb305273fd7f9db85d37fbf0c86db544288c71cd16052e8",
+    "sourceHash": "cc8856538ae3eebeadad646f7341879af4b6ca6874d388d2dbd5f0a3df95de87",
     "outputHash": "d260f2c32d06b18ff97d50468d96f1ea3c07b815f4d554ddbed342dd17e771e3",
     "managed": true,
-    "generatedAt": "2026-09-23T16:10:16.230Z"
+    "generatedAt": "2026-09-23T16:14:53.270Z"
   },
   "assets/thumbs/context-engineering.png": {
     "sourceRel": "assets/context-engineering.svg",
-    "sourceHash": "c1d0c87f84ca6db8d76cb548fd29c543cda1c0ab6d7a373e28e19dc81c81a74a",
+    "sourceHash": "44d98b9db947a697dd5ff06dd3951f4ae2f900c42fd3ed5f5f95559fb31cd7a2",
     "outputHash": "f99e665c27937618670d51e45edcb3b24cfeccce36e138618ddb8e0d5eee7307",
     "managed": true,
-    "generatedAt": "2026-09-23T16:10:16.586Z"
+    "generatedAt": "2026-09-23T16:14:53.719Z"
   },
   "assets/thumbs/sql-schema.png": {
     "sourceRel": "assets/schema.svg",
-    "sourceHash": "de4830edd9ad52f11744c9e321d1890bfffa44bd9b34fe353ffdd0cc5c963057",
+    "sourceHash": "a146d64e948e0f8c7ae12cbaa271f4ad3633370b9eee821e1633f6a02cdaebe1",
     "outputHash": "ab0d913fb3a2d9b7f0d0e22cef1f0f38c4c092192d56ae3abe1469ca5a1d5d65",
     "managed": true,
-    "generatedAt": "2026-09-23T16:10:17.786Z"
+    "generatedAt": "2026-09-23T16:14:54.698Z"
   },
   "assets/thumbs/wd+ru.png": {
     "sourceRel": "assets/wd+ru.svg",
-    "sourceHash": "94b102d218caa1bee67e0bd614f3c6e05b608bce1da52451d7131d791c0942a5",
+    "sourceHash": "530d193240c695a8c38d6586b403931fe700749a36e6a8f87c39e5af7833a81c",
     "outputHash": "c7a82133e91fd82ad68cd70534e7de0afe142d1c157c8b101aa5f417d510d627",
     "managed": true,
-    "generatedAt": "2026-09-23T16:10:19.105Z"
+    "generatedAt": "2026-09-23T16:14:55.989Z"
   },
   "assets/thumbs/conceptual-framework.png": {
     "sourceRel": "assets/conceptual-framework.svg",
-    "sourceHash": "1f1c4369597804e01e50a0ba2da63ba45fffa929c8bec3688ae0243e5e0f4e50",
+    "sourceHash": "faf0f554e7c79c914d669817063797165ae4e345627ebd98e36af237edace698",
     "outputHash": "bf5e14bbd264ee8e7cb7ec57d217675c55b20a30c491e3fcb94cfd13462b2acc",
     "managed": true,
-    "generatedAt": "2026-09-23T16:10:19.217Z"
+    "generatedAt": "2026-09-23T16:14:56.103Z"
   },
   "assets/thumbs/theoretical-framework.png": {
     "sourceRel": "assets/theoretical-framework.svg",
-    "sourceHash": "939b7c79b3f9647a3a76b95ea1740383b5cd00274ed1db99306b7a079647cc89",
+    "sourceHash": "afc67832e8b83c6bf16753f8a549f5bb2549f66a9882ec1420ea356fbf420bc9",
     "outputHash": "eb19a2e495eabdb59ff9f1f1e3a4f07d58ac09e378459cc8eb07b5fd318fe285",
     "managed": true,
-    "generatedAt": "2026-09-23T16:10:19.292Z"
+    "generatedAt": "2026-09-23T16:14:56.179Z"
   },
   "assets/thumbs/prototypical-argument-structure.png": {
     "sourceRel": "assets/prototypical_argument_structure.svg",
-    "sourceHash": "24058285bc1ba10d91c1c8f05346375345cc7bf438b9e06df5f10e033d0b5942",
+    "sourceHash": "3e97cfb198b5c84a7995f4b6e0ca874195c7273da9ec034e43be72aae59d2e22",
     "outputHash": "1e16767ca5c35c5a6a5154d775c5dfa6910d4eba19be7ed8a7ea1ef04d8def57",
     "managed": true,
-    "generatedAt": "2026-09-23T16:10:19.542Z"
+    "generatedAt": "2026-09-23T16:14:56.431Z"
   },
   "assets/thumbs/how-the-ml-works.png": {
     "sourceRel": "assets/how_the_ml_works.svg",
-    "sourceHash": "4f2d459f2e0dbaf23138d1a23df3ccad4007e19471257f2ed255ff157fd63e37",
+    "sourceHash": "1b8c135cfdfcdf07fcd4275207953648d04624718c42e25aa882347106dc7ef4",
     "outputHash": "8c32d10d8ef085989f955672be4a0f27f23d0ae8194799be1853a1e086fc1518",
     "managed": true,
-    "generatedAt": "2026-09-23T16:10:19.754Z"
+    "generatedAt": "2026-09-23T16:14:56.671Z"
   },
   "assets/thumbs/literature_mapping.png": {
     "sourceRel": "assets/literature_mapping.svg",
-    "sourceHash": "a8ad2669350998d46edcca3911620888ac8a6212caa582a7b08f9fe2390148f1",
+    "sourceHash": "6d5f13181aac97e6ba6b97e7fc24d5d3609443b6dd5b245de47143307ef6e69e",
     "outputHash": "430599a8edd3f76cee758934857f0b77c4b62c5e98c05bbb3c338a255db83012",
     "managed": true,
-    "generatedAt": "2026-09-23T16:10:21.203Z"
+    "generatedAt": "2026-09-23T16:14:58.118Z"
   },
   "assets/thumbs/plan-to-completion.png": {
     "sourceRel": "assets/plan_to _completion.svg",
-    "sourceHash": "a2a7342c46245f82a015382bf2bdfbd69a8325c9ca3163f0eb86c3d58fe93a52",
+    "sourceHash": "70c47fdc3e8e0947495a31954c3e835b55395364a466f6b3b9a13baa23d2b29a",
     "outputHash": "41a0762ee9234c3d177f1281368266f0d2eabadbfcbb8265b98fc5ee8a108907",
     "managed": true,
-    "generatedAt": "2026-09-23T16:10:21.455Z"
+    "generatedAt": "2026-09-23T16:14:58.377Z"
   },
   "assets/thumbs/data_science_algorithms.png": {
     "sourceRel": "assets/data_science_algorithms.svg",
-    "sourceHash": "0da4cb3c19df62fe90079a918089f684f03afec334862ace9383171922e72889",
+    "sourceHash": "e17ee1b7f3063b513311c3ce114b86db2669df27f442cd71632a8076131b3ea1",
     "outputHash": "7be1f85da0a32d7e967b7091e4e4cb3c7c36375679a35f4c2a0435f7ffa96a19",
     "managed": true,
-    "generatedAt": "2026-09-23T16:10:21.818Z"
+    "generatedAt": "2026-09-23T16:14:58.765Z"
   },
   "assets/thumbs/methodological-rationale-for-archival-reactivation.png": {
     "sourceRel": "assets/methodological-rationale-for-archival-reactivation.svg",
-    "sourceHash": "f8fdd6a746736faa9b577d50a1a10228901d793e10eb69f120be39ad24910164",
+    "sourceHash": "06b5eaf6ed70e37ad38ecfb8fc1d76db8bcc1d9193c976f43a0f7905b9b87e69",
     "outputHash": "9c0c10a2454e86bdd04170d6d0022fbb7e27ee49d2b2f6236f152df16adfd52d",
     "managed": true,
-    "generatedAt": "2026-09-23T16:10:22.076Z"
+    "generatedAt": "2026-09-23T16:14:59.023Z"
   },
   "assets/thumbs/ddr-archive-relations.png": {
     "sourceRel": "assets/alluvial_people+projects.svg",
-    "sourceHash": "697a5f1e2585317492c9d853966d949ad6ce0b3423e717b72397fd5882952576",
+    "sourceHash": "c4b1aaca1e8083e67c7a462fb84d940b5ad7dd39c1c5b9107ea0286d99a72782",
     "outputHash": "e1f19393495332efe3c84d882072353ac89724309bb898c7b33e89f856ed81d7",
     "managed": true,
-    "generatedAt": "2026-09-23T16:10:23.087Z"
+    "generatedAt": "2026-09-23T16:14:59.959Z"
   },
   "assets/thumbs/research-instrument-inquiry.png": {
     "sourceRel": "assets/research_instrument_inquiry.svg",
-    "sourceHash": "1a3faeea18adfb4aa408bbda212591412b0a081d52e99b1572b814011fd32aae",
+    "sourceHash": "719162d13a29cc743cbe27d4ea4cfe8c30a91b22df3f13d42c0d59ac6348efa5",
     "outputHash": "45b4c81b4fbe5f99a7bfb1fc5498dd846289e036aef933d9c2eb1419c2df379b",
     "managed": true,
-    "generatedAt": "2026-09-23T16:10:23.350Z"
+    "generatedAt": "2026-09-23T16:15:00.210Z"
   },
   "assets/thumbs/school-of-communication-rca-centre-for-visual-cultures-royal-holloway.png": {
     "sourceRel": "assets/rcaxcvc.svg",
-    "sourceHash": "64300310cf46831e3777e721885697b1ef3cdb09fcb13180076834cd8a015fed",
+    "sourceHash": "efb5d95f6ce7ebd169ca88c98c2fabc40798afd387895130a81278b633077268",
     "outputHash": "09d4f71d9f234e50c4ae1ae464ded2a3242853457ff67c46d47953dc2c283b19",
     "managed": true,
-    "generatedAt": "2026-09-23T16:10:23.947Z"
+    "generatedAt": "2026-09-23T16:15:00.762Z"
   },
   "assets/thumbs/turin-conference-paper-experiment-analysis.png": {
     "sourceRel": "assets/turin_alluvial.svg",
-    "sourceHash": "a45c50dcc9a6dde2c6d55e9539ea37ec769d05edd9bb0bcdb0653c69bdb1ab96",
+    "sourceHash": "63764e8b1b7a6359ddc96f528e56dec8bb1f24294a9cc0421c21dee83f591b22",
     "outputHash": "f6e0cce996e5731a1efdb20331ec81541f346c273f772b793b8f04b7eb6b585c",
     "managed": true,
-    "generatedAt": "2026-09-23T16:10:24.395Z"
+    "generatedAt": "2026-09-23T16:15:01.172Z"
   },
   "assets/thumbs/umap-projector.png": {
     "sourceRel": "assets/umap_projector.svg",
-    "sourceHash": "329865070846d102c56a79fdeff91075eeba63a6d5046ea3d3f5500fef4fa24e",
-    "outputHash": "e16adb7501b4457cb57302838235219ae3447ea35fa398b6ae92ab3bedbe0c0e",
+    "sourceHash": "29788c78350257663fa099e3e6602cb4b025513a58978d5f26b7dc8b928e6d7f",
+    "outputHash": "360e04ba809b10d2bdc99b3168c6c25ffcba4ec9928ff5aecb67a39527ea28ee",
     "managed": true,
-    "generatedAt": "2026-09-23T16:10:24.481Z"
+    "generatedAt": "2026-09-23T16:15:01.258Z"
   }
 }
