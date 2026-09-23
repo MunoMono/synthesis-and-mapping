@@ -331,5 +331,19 @@
       "evidence"
     ],
     "date": "2026-09-21"
+  },
+  {
+    "slug": "umap-projector",
+    "title": "UMAP projector: testamentary traces in play",
+    "desc": "A five-mode UMAP framework for examining how testamentary traces in the DDR archive are mapped, followed, compared, traced and probed to make relationships, change, obscurity and evidential limits newly legible through data science.",
+    "file": "assets/umap_projector.svg",
+    "thumb": "assets/umap_projector.svg",
+    "tags": [
+      "umap",
+      "data science",
+      "archive",
+      "testamentary traces"
+    ],
+    "date": "2026-09-23"
   }
 ]
