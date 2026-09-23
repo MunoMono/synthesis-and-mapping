@@ -165,18 +165,32 @@
     "date": "2026-03-19"
   },
   {
-    "slug": "phd-model",
-    "title": "PhD conceptual framework",
-    "desc": "A three-strand conceptual framework for activating the RCA’s DDR archive through testamentary traces of contested design knowledge, linking historical inquiry, archival systems, and computational methods including multimodal machine learning and visual analytics.",
-    "file": "assets/phd-framework.svg",
-    "thumb": "assets/phd-framework.svg",
+    "slug": "conceptual-framework",
+    "title": "PhD conceptual model",
+    "desc": "A three-strand conceptual framework for activating the RCA’s DDR archive through testamentary traces of contested design knowledge, linking their historical emergence, archival mediation and computational reactivation through retrieval-augmented inference, scoped missingness and visual analytics.",
+    "file": "assets/conceptual-framework.svg",
+    "thumb": "assets/conceptual-framework.svg",
     "tags": [
       "research-framework",
       "archive",
       "design-research",
       "computational-methods"
     ],
-    "date": "2026-03-20"
+    "date": "2026-09-23"
+  },
+  {
+    "slug": "theoretical-framework",
+    "title": "PhD theoretical model",
+    "desc": "A three-lens theoretical framework bringing critical design historiography, critical archival theory and critical computational approaches into relation to examine how contested design knowledge is produced, organised, obscured and made newly legible while preserving provenance, ambiguity and absence.",
+    "file": "assets/theoretical-framework.svg",
+    "thumb": "assets/theoretical-framework.svg",
+    "tags": [
+      "research-framework",
+      "archive",
+      "design-research",
+      "critical-theory"
+    ],
+    "date": "2026-09-23"
   },
   {
     "slug": "prototypical-argument-structure",
@@ -302,5 +316,20 @@
       "presentation"
     ],
     "date": "2026-06-23"
+  },
+  {
+    "slug": "turin-conference-paper-experiment-analysis",
+    "title": "Turin conference paper experiment analysis",
+    "desc": "Turin conference paper evidential pathways across the 12 experimental cases. The alluvial diagram shows how known relationships, contested interpretations and scoped missingness were routed through different evidence strategies and synthesis behaviours to bounded evidential outcomes. Band width represents the number of cases following each path.",
+    "file": "assets/turin_alluvial.svg",
+    "thumb": "assets/turin_alluvial.svg",
+    "tags": [
+      "alluvial",
+      "conference-paper",
+      "analysis",
+      "synthesis",
+      "evidence"
+    ],
+    "date": "2026-09-21"
   }
 ]
